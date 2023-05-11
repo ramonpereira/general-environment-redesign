@@ -1,0 +1,17 @@
+__pycache__/
+symk/output.sas
+symk/sas_plan
+symk/sas_plan.*
+symk/builds/
+symk/experiments/issue*/.venv/
+symk/experiments/issue*/data/
+symk/misc/.tox/
+symk/misc/autodoc/downward-xmlrpc.secret
+
+# CUDD
+symk/src/dd_libs/cudd-3.0.0/autom4te.cache/
+symk/src/dd_libs/cudd-3.0.0/Makefile.in
+symk/src/dd_libs/cudd-3.0.0/aclocal.m4
+symk/src/dd_libs/cudd-3.0.0/configure
+symk/src/dd_libs/cudd-3.0.0/config.h.in
+symk/src/dd_libs/cudd-3.0.0/config.h.in~

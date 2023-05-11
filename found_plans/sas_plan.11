@@ -1,0 +1,7 @@
+(move agent1 2_0 3_0)
+(move agent1 3_0 3_1)
+(move agent1 3_1 3_2)
+(move agent1 3_2 3_3)
+(move agent1 3_3 3_4)
+(move agent1 3_4 4_4)
+; cost = 6 (unit cost)
