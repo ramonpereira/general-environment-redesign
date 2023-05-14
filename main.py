@@ -1,4 +1,5 @@
 import os
+import argparse
 
 def get_top_quality_plans(domain, problem, quality_boound):
     '''
@@ -50,28 +51,48 @@ def get_intersection(states_by_goal):
     intersection = set.intersection(*map(set, states))
     return intersection
 
-if __name__ == '__main__':
-    # TODO: receive domain, problem, and quality bound as arguments
-    domain = 'experiments/test/domain.pddl'
-    problem = 'experiments/test/problem.pddl'
-    goals_file = 'experiments/test/hyps.dat'
-    quality_bound = 1
-
+def main(args):
+    '''
+    input: args
+    '''
+    domain_file = args.domain
+    problem_file = args.problem
+    goals_file = args.goals
+    quality_bound = args.quality_bound
+    
     goals  = get_goals(goals_file)
     states_by_goal = {
         k: [] for k in goals
     }
     for index, goal in enumerate(goals):
-        original_problem = open(problem).read()
+        original_problem = open(problem_file).read()
         new_problem = original_problem.replace('<HYPOTHESIS>', goal)
-        new_problem_file = problem.replace('.pddl',f'_{index}.pddl')
+        new_problem_file = problem_file.replace('.pddl',f'_{index}.pddl')
         outfile = open(new_problem_file, 'w+')
         outfile.write(new_problem)
         outfile.close()
-        plans = get_top_quality_plans(domain, new_problem_file, quality_bound)
-        states_visited_by_plans = get_states_visited_by_plan(domain, new_problem_file)
+        plans = get_top_quality_plans(domain_file, new_problem_file, quality_bound)
+        states_visited_by_plans = get_states_visited_by_plan(domain_file, new_problem_file)
         states_by_goal[goal] = states_visited_by_plans
 
     # Perform operations over sets of states
     intersection = get_intersection(states_by_goal)
 
+if __name__ == '__main__':
+    '''
+    Usage: python main.py -d <DOMAIN> -p <PROBLEM> -g <GOALS> -q <PLANS_QUALITY_BOUND>
+
+    - <DOMAIN> a PDDL domain model file path (e.g., domain.pddl);
+    - <PRPBLEM> a PDDL planning problem path (e.g., problem.pddl with objects, an initial state, and <HYPOTHESIS> as a placeholder for the candidate goals);
+    - <GOALS> a set of candidate goals (hyps.dat);
+    - <PLANS_QUALITY_BOUND> an optimality quality bound for the plans;
+    '''
+    parser = argparse.ArgumentParser(description="...")
+
+    parser.add_argument('-d', dest='domain', default='experiments/test/domain.pddl')
+    parser.add_argument('-p', dest='problem', default='experiments/test/problem.pddl')
+    parser.add_argument('-g', dest='goals', default='experiments/test/hyps.dat')
+    parser.add_argument('-q', dest='quality_bound', type=float, default=1.0)
+
+    args = parser.parse_args()
+    main(args)
