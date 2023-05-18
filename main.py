@@ -1,5 +1,6 @@
 import os
 import argparse
+from domain_dependent_search.search import best_first_search
 
 def get_top_quality_plans(domain, problem, quality_boound):
     '''
@@ -64,6 +65,9 @@ def main(args):
     states_by_goal = {
         k: [] for k in goals
     }
+    plans_by_goal = {
+        k: [] for k in goals
+    }
     for index, goal in enumerate(goals):
         original_problem = open(problem_file).read()
         new_problem = original_problem.replace('<HYPOTHESIS>', goal)
@@ -72,11 +76,15 @@ def main(args):
         outfile.write(new_problem)
         outfile.close()
         plans = get_top_quality_plans(domain_file, new_problem_file, quality_bound)
-        states_visited_by_plans = get_states_visited_by_plan(domain_file, new_problem_file)
-        states_by_goal[goal] = states_visited_by_plans
+        #states_visited_by_plans = get_states_visited_by_plan(domain_file, new_problem_file)
+        #states_by_goal[goal] = states_visited_by_plans
+        plans_by_goal[goal] = plans
 
     # Perform operations over sets of states
-    intersection = get_intersection(states_by_goal)
+    #intersection = get_intersection(states_by_goal)
+
+    # Run search to compute the best way of modifying the environment
+    best_first_search(plans_by_goal)
 
 if __name__ == '__main__':
     '''
