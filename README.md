@@ -1,5 +1,6 @@
 # Environment Redesign as Planning
-Repository for a planning project for Plan Recognition and related topics (Transparent Planning, Deception, etc).
+
+Environment Redesign as Planning: Redesigning environments for cooperative and adversarial environment settings and different intepretable behaviours. 
 
 ## Goal Recognition Design 
 
