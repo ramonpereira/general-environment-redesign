@@ -1,5 +1,13 @@
-# planning-project
+# Environment Redesign as Planning
 Repository for a planning project for Plan Recognition and related topics (Transparent Planning, Deception, etc).
+
+## Goal Recognition Design 
+
+https://github.com/sarah-keren/goal-recognition-design
+
+## Plan Recognition Design over Plan Libraries
+
+https://github.com/ReuthMirsky/PRD
 
 ## Top-K Planners 
 
@@ -11,3 +19,4 @@ https://github.com/IBM/forbiditerative
 
 ## Counting Plans
 https://github.com/Vraier/planDD
+
