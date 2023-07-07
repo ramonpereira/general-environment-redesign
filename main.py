@@ -9,7 +9,7 @@ def get_top_quality_plans(domain, problem, quality_boound):
             these plans are also written to a folder called found_plans
     '''
     # Using David Specks approach as it is state of the art, being able to return loopless plans
-    cmd = f'symk/fast-downward.py {domain} {problem} --search "symq-bd(simple=true,plan_selection=top_k(num_plans=infinity),quality={quality_boound})"'
+    cmd = f'symk/fast-downward.py {domain} {problem} --search "symq-bd(simple=true,plan_selection=top_k(num_plans=infinity),quality={quality_boound})" > /dev/null'
     os.system(cmd)
     plans = []
     for file in os.listdir('found_plans/'):
@@ -60,6 +60,7 @@ def main(args):
     problem_file = args.problem
     goals_file = args.goals
     quality_bound = args.quality_bound
+    suboptimality_bound = 2.0
     
     goals  = get_goals(goals_file)
     states_by_goal = {
@@ -68,6 +69,10 @@ def main(args):
     plans_by_goal = {
         k: [] for k in goals
     }
+    suboptimal_plans_by_goal = {
+        k: [] for k in goals
+    }
+    print('Computing top-quality plans...')
     for index, goal in enumerate(goals):
         original_problem = open(problem_file).read()
         new_problem = original_problem.replace('<HYPOTHESIS>', goal)
@@ -76,15 +81,19 @@ def main(args):
         outfile.write(new_problem)
         outfile.close()
         plans = get_top_quality_plans(domain_file, new_problem_file, quality_bound)
+        suboptimal_plans = []
+        if suboptimality_bound > 1:
+            suboptimal_plans = get_top_quality_plans(domain_file, new_problem_file, suboptimality_bound)
         #states_visited_by_plans = get_states_visited_by_plan(domain_file, new_problem_file)
         #states_by_goal[goal] = states_visited_by_plans
         plans_by_goal[goal] = plans
+        suboptimal_plans_by_goal[goal] = suboptimal_plans
 
     # Perform operations over sets of states
     #intersection = get_intersection(states_by_goal)
-
+    print('Running Search...')
     # Run search to compute the best way of modifying the environment
-    best_first_search(plans_by_goal)
+    best_first_search(plans_by_goal, suboptimal_plans_by_goal)
 
 if __name__ == '__main__':
     '''
