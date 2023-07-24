@@ -32,7 +32,7 @@ def get_actions_info(plans_by_goal):
     return actions_info
 
 
-def is_goal(node, plans_by_goal, plans2_by_goal, objective, bounds):
+def is_goal(node, plans_by_goal, plans2_by_goal, objective, bounds, domain, problem, candidate_goals, true_goal):
     valid_plans_by_goal = generate_valid_plans(node, plans_by_goal)
     valid_plans2_by_goal = generate_valid_plans(node, plans2_by_goal)
     if objective == 'plan_transparency':
@@ -53,6 +53,21 @@ def is_goal(node, plans_by_goal, plans2_by_goal, objective, bounds):
     elif objective == 'promote_goal_deception':
         if get_wcndecept(node, valid_plans_by_goal, valid_plans2_by_goal) == bounds['wcndecept']:
             return True
+    elif 'goal_compliance' in objective:
+        avg_distance, min_distance, max_distance = get_distance_GC(node, plans_by_goal, domain, problem, candidate_goals,
+                                                                   true_goal)
+        if objective == 'min_avg_distance_goal_compliance':
+            if avg_distance == bounds['min_avg']:
+                return True
+        elif objective == 'max_avg_distance_goal_compliance':
+            if avg_distance == bounds['max_avg']:
+                return True
+        elif objective == 'min_max_distance_goal_compliance':
+            if max_distance == bounds['min_max']:
+                return True
+        elif objective == 'max_min_distance_goal_compliance':
+            if min_distance == bounds['max_min']:
+                return True
     else:
         raise ValueError(f'Objective {objective} not coded')
 
@@ -83,7 +98,7 @@ def generate_children(current_node, sorted_actions, plans):
 def add_to_open(open_list_set, child):
     return not (child in open_list_set and child.f >= open_list_set[child])
 
-def get_all_metrics(node, plans, plans2):
+def get_all_metrics(node, plans, plans2, domain, problem, candidate_goals, true_goal):
     if list(plans2.values())[0] == []:
         plans2 = plans
     wcd = get_wcd(node, plans)
@@ -92,7 +107,8 @@ def get_all_metrics(node, plans, plans2):
     p_wcnd = get_p_wcnd(node, plans)
     wcdecept = get_wcdecept(node, plans, plans2)
     wcndecept = get_wcndecept(node, plans, plans2)
-    return wcd, wcnd, p_wcd, p_wcnd, wcdecept, wcndecept
+    avg_distance, min_distance, max_distance = get_distance_GC(node, plans, domain, problem, candidate_goals, true_goal)
+    return wcd, wcnd, p_wcd, p_wcnd, wcdecept, wcndecept, avg_distance, min_distance, max_distance
 
 def print_solution(node, plans, plans2, expanded_nodes, generated_nodes):
     print()
@@ -109,11 +125,13 @@ def print_solution(node, plans, plans2, expanded_nodes, generated_nodes):
         print(f'Goal: {goal}')
         print(f'Plan: {str(plans)}')
 
-def best_first_search(plans, plans2, objective='goal_transparency'):
+def best_first_search(plans, plans2, domain, problem, goals, objective='min_avg_distance_goal_compliance'):
     print(f'Optimizing {objective}...')
     # Search stats
     expanded_nodes = 0
     generated_nodes = 1
+    true_goal = goals[0]
+    candidate_goals = goals[1:]
 
     # Data to generate successors and set goal conditions
     actions_info = get_actions_info(plans)
@@ -134,19 +152,23 @@ def best_first_search(plans, plans2, objective='goal_transparency'):
         # TODO: same as above
         sorted_actions = sorted(actions, key=lambda x: actions_info[x]['num_goals_present'])
     elif objective == 'avoid_plan_deception':
-        raise ValueError('TO BE CODED')
+        raise ValueError('TO BE CODED, I THINK IT DOES NOT MAKE SENSE')
     elif objective == 'promote_plan_deception':
-        raise ValueError('TO BE CODED')
+        raise ValueError('TO BE CODED, I THINK IT DOES NOT MAKE SENSE')
     # The metrics below require extra code to compute the distances
     # between the states traversed by the optimal plans and the compliance goals
     elif objective == 'min_avg_distance_goal_compliance':
-        raise ValueError('TO BE CODED')
+        #TODO: no sorting on this one for now
+        sorted_actions = actions
     elif objective == 'max_avg_distance_goal_compliance':
-        raise ValueError('TO BE CODED')
+        # TODO: no sorting on this one for now
+        sorted_actions = actions
     elif objective == 'min_max_distance_goal_compliance':
-        raise ValueError('TO BE CODED')
+        # TODO: no sorting on this one for now
+        sorted_actions = actions
     elif objective == 'max_min_distance_goal_compliance':
-        raise ValueError('TO BE CODED')
+        # TODO: no sorting on this one for now
+        sorted_actions = actions
     else:
         raise ValueError(f'Objective {objective} has not been defined')
 
@@ -162,7 +184,10 @@ def best_first_search(plans, plans2, objective='goal_transparency'):
     original_p_wcd,\
     original_p_wcnd,\
     original_wcdecept,\
-    original_wcndecept  = get_all_metrics(start_node, plans, plans2)
+    original_wcndecept,\
+    original_avg_distance_GC,\
+    original_min_distance_GC,\
+    original_max_distance_GC = get_all_metrics(start_node, plans, plans2, domain, problem, candidate_goals, true_goal)
     # Bounds are used to check the goal condition
     bounds = {
         'wcd': 0,
@@ -170,12 +195,21 @@ def best_first_search(plans, plans2, objective='goal_transparency'):
         'p_wcd': 0,
         'p_wcnd': original_p_wcd,
         'wcdecept': 0,
-        'wcndecept': original_wcdecept
+        'wcndecept': original_wcdecept,
+        #TODO: the following goal conditions are really difficult to be defined
+        'min_avg': 0,
+        'max_avg': 1000,
+        'min_max': 0,
+        'max_min': 1000
     }
 
     start_node.g = 0
     start_node.h = 0
     start_node.f = start_node.g + start_node.h
+
+    #TODO: develop greedy version where we
+    # (1) stop the algorithm after we do not see improvements in X iterations
+    # (2) stop the algorithm after it improves the original environment
 
     best_node = start_node
     if objective == 'plan_transparency':
@@ -190,6 +224,14 @@ def best_first_search(plans, plans2, objective='goal_transparency'):
         best_value = original_wcdecept
     elif objective == 'promote_goal_deception':
         best_value = 1000 - original_wcndecept
+    elif objective == 'min_avg_distance_goal_compliance':
+        best_value = original_avg_distance_GC
+    elif objective == 'max_avg_distance_goal_compliance':
+        best_value = 1000 - original_avg_distance_GC
+    elif objective == 'min_max_distance_goal_compliance':
+        best_value = original_max_distance_GC
+    elif objective == 'max_min_distance_goal_compliance':
+        best_value = 1000 - original_min_distance_GC
     else:
         raise ValueError(f'Objective {objective} not coded')
     start_node.metric = best_value
@@ -206,7 +248,7 @@ def best_first_search(plans, plans2, objective='goal_transparency'):
         current_node = heapq.heappop(open_list)
         expanded_nodes += 1
         closed_list.add(current_node)
-        if is_goal(current_node, plans, plans2, objective, bounds):
+        if is_goal(current_node, plans, plans2, objective, bounds, domain, problem, candidate_goals, true_goal):
             print_solution(current_node, plans, plans2, expanded_nodes, generated_nodes)
             return current_node.removed_actions
         children = generate_children(current_node, sorted_actions, plans)
@@ -306,6 +348,63 @@ def best_first_search(plans, plans2, objective='goal_transparency'):
                             print('New best node found')
                             print(f'Node: {best_node}')
                             print(f'Metric: {best_value}')
+
+                elif 'goal_compliance' in objective:
+                    avg_distance, min_distance, max_distance = get_distance_GC(child, plans, domain, problem, candidate_goals, true_goal)
+                    if objective == 'min_avg_distance_goal_compliance':
+                        if avg_distance == 'inf':
+                            child.g = 10000
+                            child.metric = 10000
+                        else:
+                            child.g = len(child.removed_actions)
+                            child.metric = avg_distance
+                            if avg_distance < best_value:
+                                best_node = child
+                                best_value = avg_distance
+                                print('New best node found')
+                                print(f'Node: {best_node}')
+                                print(f'Metric: {best_value}')
+                    elif objective == 'max_avg_distance_goal_compliance':
+                        if avg_distance == 'inf':
+                            child.g = 10000
+                            child.metric = 10000
+                        else:
+                            max_avg_distance  = 1000 - avg_distance
+                            child.g = len(child.removed_actions)
+                            child.metric = max_avg_distance
+                            if max_avg_distance < best_value:
+                                best_node = child
+                                best_value = max_avg_distance
+                                print('New best node found')
+                                print(f'Node: {best_node}')
+                                print(f'Metric: {best_value}')
+                    elif objective == 'min_max_distance_goal_compliance':
+                        if max_distance == 'inf':
+                            child.g = 10000
+                            child.metric = 10000
+                        else:
+                            child.g = len(child.removed_actions)
+                            child.metric = max_distance
+                            if max_distance < best_value:
+                                best_node = child
+                                best_value = max_distance
+                                print('New best node found')
+                                print(f'Node: {best_node}')
+                                print(f'Metric: {best_value}')
+                    elif objective == 'max_min_distance_goal_compliance':
+                        if min_distance == 'inf':
+                            child.g = 10000
+                            child.metric = 10000
+                        else:
+                            max_min_distance = 1000 - min_distance
+                            child.g = len(child.removed_actions)
+                            child.metric = max_min_distance
+                            if max_min_distance < best_value:
+                                best_node = child
+                                best_value = max_min_distance
+                                print('New best node found')
+                                print(f'Node: {best_node}')
+                                print(f'Metric: {best_value}')
 
                 else:
                     raise ValueError(f'Objective {objective} not coded yet')

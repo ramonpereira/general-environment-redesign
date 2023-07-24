@@ -60,6 +60,9 @@ def parse_args():
     argparser.add_argument(
         "--get-states", action="store_true",
         help="get states traversed during a plan")
+    argparser.add_argument(
+        "--prune_actions", action="store_true",
+        help="prune actions in a given task")
     return argparser.parse_args()
 
 

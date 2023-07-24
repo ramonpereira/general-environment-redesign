@@ -1,4 +1,6 @@
 import itertools as it
+import os
+import re
 
 def generate_valid_plans(node, plans_by_goal):
     valid_plans = {
@@ -16,6 +18,20 @@ def generate_valid_plans(node, plans_by_goal):
         valid_plans[goal] = still_valid_plans
     return valid_plans
 
+def get_states_visited_by_plan(domain, problem):
+    '''
+    input: planning task (domain, problem)
+           it gets the plans present in the found_plans directory
+    output: all the states visited by all the plans that solve the task with the given bound
+    '''
+    cmd = f'symk/src/translate/translate.py {domain} {problem} --get-states'
+    os.system(cmd)
+    states = []
+    infile = open('states.txt')
+    for line in infile:
+        states.append(line.strip())
+    return states
+
 def all_goals_are_achievable(valid_plans):
     plans_by_goal = [x for k, x in valid_plans.items()]
     all_goals_achievable = True
@@ -25,7 +41,36 @@ def all_goals_are_achievable(valid_plans):
             break
     return all_goals_achievable
 
+def generate_new_problem(problem, state, g):
+    infile = open(problem, 'r')
+    problem_string = ''.join(infile.readlines())
+    pre_init = problem_string.split('(:init')[0]
+    new_state = f'(:init\n' + state
+    post_init = f')\n(:goal (and {g})))'
+    new_problem_string = '\n'.join([pre_init, new_state, post_init])
+    outfile = open('new_problem.pddl', 'w+')
+    outfile.write(new_problem_string)
+    outfile.close()
 
+def compute_distance(node, domain, problem, g, state):
+    actions_to_prune = node.removed_actions
+    outfile = open('actions_to_prune.txt','w+')
+    outfile.write(','.join(actions_to_prune))
+    outfile.close()
+    generate_new_problem(problem, state, g)
+    cmd = f'symk/fast-downward.py {domain} new_problem.pddl --search "sym-bd()" --prune_actions > new_problem_output.txt'
+    os.system(cmd)
+    try:
+        result_file = open('new_problem_output.txt','r')
+        result_string = ''.join(result_file.readlines())
+        match = re.search(r'Plan cost: (\d+)', result_string)
+        if match:
+            plan_cost = int(match.group(1))
+        else:
+            plan_cost = 'inf'
+    except:
+        raise ValueError('New problem output does not exist')
+    return plan_cost
 
 
 def get_wcd(node, plans):
@@ -166,5 +211,30 @@ def get_wcndecept(node, optimal_plans, suboptimal_plans):
         if common_prefix:
             break
     return prefix_size - 1
+
+def get_distance_GC(node, plans, domain, problem, candidate_goals, true_goal):
+    problem = problem.replace('.pddl','_0.pddl') # TODO: ugly patch, fix this eventually
+    valid_plans = generate_valid_plans(node, plans)
+    if not all_goals_are_achievable(valid_plans):
+        return 'inf'
+    real_goal_plans = valid_plans[true_goal]
+    for plan_id, plan in enumerate(real_goal_plans):
+        outfile = open(f'found_plans/{plan_id}.txt', 'w+')
+        outfile.write('\n'.join(plan))
+        outfile.close()
+    os.system('rm found_plans/sas_plan*')
+    states = get_states_visited_by_plan(domain, problem)
+    distances = {g: [] for g in candidate_goals}
+    for g in candidate_goals:
+        for state in states:
+            distance = compute_distance(node, domain, problem, g, state)
+            distances[g].append(distance)
+    distances_per_candidate_goal = [x for k, x in distances.items()]
+    all_distances = [item for sublist in distances_per_candidate_goal for item in sublist]
+    avg = sum(all_distances) / len(all_distances)
+    minimum = min(all_distances)
+    maximum = max(all_distances)
+    return avg, minimum, maximum
+
 
 

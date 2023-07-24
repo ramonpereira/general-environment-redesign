@@ -21,20 +21,6 @@ def get_top_quality_plans(domain, problem, quality_boound):
         plans.append(plan)
     return plans
 
-def get_states_visited_by_plan(domain, problem):
-    '''
-    input: planning task (domain, problem)
-           it gets the plans present in the found_plans directory
-    output: all the states visited by all the plans that solve the task with the given bound
-    '''
-    cmd = f'symk/src/translate/translate.py {domain} {problem} --get-states'
-    os.system(cmd)
-    states = []
-    infile = open('states.txt')
-    for line in infile:
-        states.append(line.strip())
-    return states
-
 def get_goals(goals_file):
     '''
     input: goals file
@@ -72,6 +58,7 @@ def main(args):
     suboptimal_plans_by_goal = {
         k: [] for k in goals
     }
+    os.system('rm found_plans/*')
     print('Computing top-quality plans...')
     for index, goal in enumerate(goals):
         original_problem = open(problem_file).read()
@@ -92,8 +79,8 @@ def main(args):
     # Perform operations over sets of states
     #intersection = get_intersection(states_by_goal)
     print('Running Search...')
-    # Run search to compute the best way of modifying the environment
-    best_first_search(plans_by_goal, suboptimal_plans_by_goal)
+    # Run search to compute the best way of modifying the environmentx
+    best_first_search(plans_by_goal, suboptimal_plans_by_goal, domain_file, problem_file, goals)
 
 if __name__ == '__main__':
     '''
