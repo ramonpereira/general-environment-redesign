@@ -1,0 +1,5 @@
+(and (clear r) (on r a) (on a t) (ontable t))
+(and (clear a) (on a p) (on p t) (on t e) (on e r) (ontable r))
+(and (clear r) (on r a) (on a p) (on p t) (ontable t))
+(and (clear r) (on r a) (on a t) (on t e) (ontable e))
+(and (clear p) (on p a) (on a r) (on r e) (ontable e))

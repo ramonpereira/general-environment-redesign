@@ -63,6 +63,9 @@ def parse_args():
     argparser.add_argument(
         "--prune_actions", action="store_true",
         help="prune actions in a given task")
+    argparser.add_argument(
+        "--get_grounded_actions", action="store_true",
+        help="get_grounded_actions")
     return argparser.parse_args()
 
 

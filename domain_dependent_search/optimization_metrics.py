@@ -24,7 +24,7 @@ def get_states_visited_by_plan(domain, problem):
            it gets the plans present in the found_plans directory
     output: all the states visited by all the plans that solve the task with the given bound
     '''
-    cmd = f'symk/src/translate/translate.py {domain} {problem} --get-states'
+    cmd = f'../symk/src/translate/translate.py {domain} {problem} --get-states > /dev/null'
     os.system(cmd)
     states = []
     infile = open('states.txt')
@@ -58,7 +58,7 @@ def compute_distance(node, domain, problem, g, state):
     outfile.write(','.join(actions_to_prune))
     outfile.close()
     generate_new_problem(problem, state, g)
-    cmd = f'symk/fast-downward.py {domain} new_problem.pddl --search "sym-bd()" --prune_actions > new_problem_output.txt'
+    cmd = f'../symk/fast-downward.py {domain} new_problem.pddl --search "sym-bd()" --prune_actions > new_problem_output.txt'
     os.system(cmd)
     try:
         result_file = open('new_problem_output.txt','r')
@@ -216,7 +216,7 @@ def get_distance_GC(node, plans, domain, problem, candidate_goals, true_goal):
     problem = problem.replace('.pddl','_0.pddl') # TODO: ugly patch, fix this eventually
     valid_plans = generate_valid_plans(node, plans)
     if not all_goals_are_achievable(valid_plans):
-        return 'inf'
+        return 'inf', 'inf', 'inf'
     real_goal_plans = valid_plans[true_goal]
     for plan_id, plan in enumerate(real_goal_plans):
         outfile = open(f'found_plans/{plan_id}.txt', 'w+')
@@ -225,16 +225,23 @@ def get_distance_GC(node, plans, domain, problem, candidate_goals, true_goal):
     os.system('rm found_plans/sas_plan*')
     states = get_states_visited_by_plan(domain, problem)
     distances = {g: [] for g in candidate_goals}
+    reachability_check = True
     for g in candidate_goals:
         for state in states:
             distance = compute_distance(node, domain, problem, g, state)
-            distances[g].append(distance)
+            if isinstance(distance, int):
+                distances[g].append(distance)
+            else:
+                reachability_check = False
     distances_per_candidate_goal = [x for k, x in distances.items()]
     all_distances = [item for sublist in distances_per_candidate_goal for item in sublist]
-    avg = sum(all_distances) / len(all_distances)
-    minimum = min(all_distances)
-    maximum = max(all_distances)
-    return avg, minimum, maximum
+    if reachability_check:
+        avg = sum(all_distances) / len(all_distances)
+        minimum = min(all_distances)
+        maximum = max(all_distances)
+        return avg, minimum, maximum
+    else:
+        return 'inf', 'inf', 'inf'
 
 
 

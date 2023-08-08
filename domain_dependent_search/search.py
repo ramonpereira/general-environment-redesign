@@ -110,7 +110,7 @@ def get_all_metrics(node, plans, plans2, domain, problem, candidate_goals, true_
     avg_distance, min_distance, max_distance = get_distance_GC(node, plans, domain, problem, candidate_goals, true_goal)
     return wcd, wcnd, p_wcd, p_wcnd, wcdecept, wcndecept, avg_distance, min_distance, max_distance
 
-def print_solution(node, plans, plans2, expanded_nodes, generated_nodes):
+"""def print_solution(node, plans, plans2, expanded_nodes, generated_nodes):
     print()
     print('Solution found!')
     print(str(node))
@@ -123,10 +123,9 @@ def print_solution(node, plans, plans2, expanded_nodes, generated_nodes):
     valid_plans = generate_valid_plans(node, plans)
     for goal, plans in valid_plans.items():
         print(f'Goal: {goal}')
-        print(f'Plan: {str(plans)}')
+        print(f'Plan: {str(plans)}')"""
 
-def best_first_search(plans, plans2, domain, problem, goals, objective='min_avg_distance_goal_compliance'):
-    print(f'Optimizing {objective}...')
+def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, objective):
     # Search stats
     expanded_nodes = 0
     generated_nodes = 1
@@ -134,8 +133,11 @@ def best_first_search(plans, plans2, domain, problem, goals, objective='min_avg_
     candidate_goals = goals[1:]
 
     # Data to generate successors and set goal conditions
-    actions_info = get_actions_info(plans)
-    actions = list(actions_info.keys())
+    if not 'compliance' in objective:
+        actions_info = get_actions_info(plans)
+        actions = list(actions_info.keys())
+    else:
+        actions = grounded_actions
     if objective == 'goal_transparency':
         sorted_actions = list(reversed(sorted(actions, key=lambda x: actions_info[x]['num_goals_present'])))
     elif objective == 'plan_transparency':
@@ -179,59 +181,46 @@ def best_first_search(plans, plans2, domain, problem, goals, objective='min_avg_
         removed_actions=tuple(),
         metric=None
     )
-    original_wcd,\
-    original_wcnd,\
-    original_p_wcd,\
-    original_p_wcnd,\
-    original_wcdecept,\
-    original_wcndecept,\
-    original_avg_distance_GC,\
-    original_min_distance_GC,\
-    original_max_distance_GC = get_all_metrics(start_node, plans, plans2, domain, problem, candidate_goals, true_goal)
     # Bounds are used to check the goal condition
     bounds = {
-        'wcd': 0,
-        'wcnd': original_wcd,
-        'p_wcd': 0,
-        'p_wcnd': original_p_wcd,
-        'wcdecept': 0,
-        'wcndecept': original_wcdecept,
-        #TODO: the following goal conditions are really difficult to be defined
-        'min_avg': 0,
-        'max_avg': 1000,
-        'min_max': 0,
-        'max_min': 1000
+
     }
 
     start_node.g = 0
     start_node.h = 0
     start_node.f = start_node.g + start_node.h
 
-    #TODO: develop greedy version where we
-    # (1) stop the algorithm after we do not see improvements in X iterations
-    # (2) stop the algorithm after it improves the original environment
-
-    best_node = start_node
+    best_node = [start_node]
+    if 'compliance' in objective:
+        avg_distance, min_distance, max_distance = get_distance_GC(start_node, plans, domain, problem, candidate_goals, true_goal)
     if objective == 'plan_transparency':
-        best_value = original_p_wcd
+        # Minimize number of common actions before the plan is inferred
+        best_value = get_p_wcd(start_node, plans)
+        bounds['p_wcd'] = 0
     elif objective == 'plan_privacy':
-        best_value = 1000 - original_p_wcnd
+        # Maximize number of steps for which there are not uncommon actions before the plan is inferred
+        best_value = 1000 - get_p_wcnd(start_node, plans)
+        bounds['p_wcnd'] = get_p_wcd(start_node, plans)
     elif objective == 'goal_transparency':
-        best_value = original_wcd
+        # Minimize number of common actions before the goal is inferred
+        best_value = get_wcd(start_node, plans)
+        bounds['wcd'] = 0
     elif objective == 'goal_privacy':
-        best_value = 1000 - original_wcnd
-    elif objective == 'avoid_goal_deception':
-        best_value = original_wcdecept
-    elif objective == 'promote_goal_deception':
-        best_value = 1000 - original_wcndecept
+        # Maximize number of steps for which there are not uncommon actions before the goal is inferred
+        best_value = 1000 - get_wcnd(start_node, plans)
+        bounds['wcnd'] = get_wcd(start_node, plans)
     elif objective == 'min_avg_distance_goal_compliance':
-        best_value = original_avg_distance_GC
+        best_value = avg_distance
+        bounds['min_avg'] = 0
     elif objective == 'max_avg_distance_goal_compliance':
-        best_value = 1000 - original_avg_distance_GC
+        best_value = 1000 - avg_distance
+        bounds['max_avg'] = 1000
     elif objective == 'min_max_distance_goal_compliance':
-        best_value = original_max_distance_GC
+        best_value = max_distance
+        bounds['min_max'] = 0
     elif objective == 'max_min_distance_goal_compliance':
-        best_value = 1000 - original_min_distance_GC
+        best_value = 1000 - min_distance
+        bounds['max_min'] = 1000
     else:
         raise ValueError(f'Objective {objective} not coded')
     start_node.metric = best_value
@@ -246,11 +235,17 @@ def best_first_search(plans, plans2, domain, problem, goals, objective='min_avg_
 
     while len(open_list) > 0:
         current_node = heapq.heappop(open_list)
+        # Cost bound condition
+        """if len(current_node.removed_actions) == 5:
+            print('Best Solution Found HERE!')
+            print_solution(best_node, plans, plans2, expanded_nodes, generated_nodes)
+            return best_node.removed_actions"""
         expanded_nodes += 1
         closed_list.add(current_node)
-        if is_goal(current_node, plans, plans2, objective, bounds, domain, problem, candidate_goals, true_goal):
+        # Removing this so the algorithm becomes anytime
+        """if is_goal(current_node, plans, plans2, objective, bounds, domain, problem, candidate_goals, true_goal):
             print_solution(current_node, plans, plans2, expanded_nodes, generated_nodes)
-            return current_node.removed_actions
+            return current_node.removed_actions"""
         children = generate_children(current_node, sorted_actions, plans)
         for child in children:
             if child not in closed_list:
@@ -263,11 +258,18 @@ def best_first_search(plans, plans2, domain, problem, goals, objective='min_avg_
                         child.g = len(child.removed_actions)
                         child.metric = plan_transparency
                         if plan_transparency < best_value:
-                            best_node = child
+                            best_node = [child]
                             best_value = plan_transparency
                             print('New best node found')
-                            print(f'Node: {best_node}')
+                            print(f'Sol: {best_node}')
                             print(f'Metric: {best_value}')
+                            print(f'Nodes: {expanded_nodes}/{generated_nodes}')
+                        elif plan_transparency == best_value:
+                            if child.g <= best_node[0].g:
+                                best_node.append(child)
+                                print('Another optimal solution')
+                                print(f'Sol: {best_node}')
+                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
 
                 elif objective == 'plan_privacy':
                     aux_plan_privacy = get_p_wcnd(child, plans)
@@ -279,11 +281,18 @@ def best_first_search(plans, plans2, domain, problem, goals, objective='min_avg_
                         child.g = len(child.removed_actions)
                         child.metric = plan_privacy
                         if plan_privacy < best_value:
-                            best_node = child
+                            best_node = [child]
                             best_value = plan_privacy
                             print('New best node found')
-                            print(f'Node: {best_node}')
+                            print(f'Sol: {best_node}')
                             print(f'Metric: {best_value}')
+                            print(f'Nodes: {expanded_nodes}/{generated_nodes}')
+                        elif plan_privacy == best_value:
+                            if child.g <= best_node[0].g:
+                                best_node.append(child)
+                                print('Another optimal solution')
+                                print(f'Sol: {best_node}')
+                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
 
                 elif objective == 'goal_transparency':
                     # True goal is inferred as soon as possible
@@ -295,11 +304,18 @@ def best_first_search(plans, plans2, domain, problem, goals, objective='min_avg_
                         child.g = len(child.removed_actions)
                         child.metric = goal_transparency
                         if goal_transparency < best_value:
-                            best_node = child
+                            best_node = [child]
                             best_value = goal_transparency
                             print('New best node found')
-                            print(f'Node: {best_node}')
+                            print(f'Sol: {best_node}')
                             print(f'Metric: {best_value}')
+                            print(f'Nodes: {expanded_nodes}/{generated_nodes}')
+                        elif goal_transparency == best_value:
+                            if child.g <= best_node[0].g:
+                                best_node.append(child)
+                                print('Another optimal solution')
+                                print(f'Sol: {best_node}')
+                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
 
                 elif objective == 'goal_privacy':
                     # True goal is inferred as soon as possible
@@ -312,42 +328,18 @@ def best_first_search(plans, plans2, domain, problem, goals, objective='min_avg_
                         child.g = len(child.removed_actions)
                         child.metric = goal_privacy
                         if goal_privacy < best_value:
-                            best_node = child
+                            best_node = [child]
                             best_value = goal_privacy
                             print('New best node found')
-                            print(f'Node: {best_node}')
+                            print(f'Sol: {best_node}')
                             print(f'Metric: {best_value}')
-
-                elif objective == 'avoid_goal_deception':
-                    avoid_goal_deception = get_wcdecept(child, plans, plans2)
-                    if avoid_goal_deception == 'inf':
-                        child.g = 10000
-                        child.metric = 10000
-                    else:
-                        child.g = len(child.removed_actions)
-                        child.metric = avoid_goal_deception
-                        if avoid_goal_deception < best_value:
-                            best_node = child
-                            best_value = avoid_goal_deception
-                            print('New best node found')
-                            print(f'Node: {best_node}')
-                            print(f'Metric: {best_value}')
-
-                elif objective == 'promote_goal_deception':
-                    aux_promote_goal_deception = get_wcndecept(child, plans, plans2)
-                    if aux_promote_goal_deception == 'inf':
-                        child.g = 10000
-                        child.metric = 10000
-                    else:
-                        promote_goal_deception = 1000 - aux_promote_goal_deception
-                        child.g = len(child.removed_actions)
-                        child.metric = promote_goal_deception
-                        if promote_goal_deception < best_value:
-                            best_node = child
-                            best_value = promote_goal_deception
-                            print('New best node found')
-                            print(f'Node: {best_node}')
-                            print(f'Metric: {best_value}')
+                            print(f'Nodes: {expanded_nodes}/{generated_nodes}')
+                        elif goal_privacy == best_value:
+                            if child.g <= best_node[0].g:
+                                best_node.append(child)
+                                print('Another optimal solution')
+                                print(f'Sol: {best_node}')
+                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
 
                 elif 'goal_compliance' in objective:
                     avg_distance, min_distance, max_distance = get_distance_GC(child, plans, domain, problem, candidate_goals, true_goal)
@@ -359,11 +351,19 @@ def best_first_search(plans, plans2, domain, problem, goals, objective='min_avg_
                             child.g = len(child.removed_actions)
                             child.metric = avg_distance
                             if avg_distance < best_value:
-                                best_node = child
+                                best_node = [child]
                                 best_value = avg_distance
                                 print('New best node found')
-                                print(f'Node: {best_node}')
+                                print(f'Sol: {best_node}')
                                 print(f'Metric: {best_value}')
+                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
+                            elif avg_distance == best_value:
+                                if child.g <= best_node[0].g:
+                                    best_node.append(child)
+                                    print('Another optimal solution')
+                                    print(f'Sol: {best_node}')
+                                    print(f'Nodes: {expanded_nodes}/{generated_nodes}')
+
                     elif objective == 'max_avg_distance_goal_compliance':
                         if avg_distance == 'inf':
                             child.g = 10000
@@ -373,11 +373,19 @@ def best_first_search(plans, plans2, domain, problem, goals, objective='min_avg_
                             child.g = len(child.removed_actions)
                             child.metric = max_avg_distance
                             if max_avg_distance < best_value:
-                                best_node = child
+                                best_node = [child]
                                 best_value = max_avg_distance
                                 print('New best node found')
-                                print(f'Node: {best_node}')
+                                print(f'Sol: {best_node}')
                                 print(f'Metric: {best_value}')
+                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
+                            elif max_avg_distance == best_value:
+                                if child.g <= best_node[0].g:
+                                    best_node.append(child)
+                                    print('Another optimal solution')
+                                    print(f'Sol: {best_node}')
+                                    print(f'Nodes: {expanded_nodes}/{generated_nodes}')
+
                     elif objective == 'min_max_distance_goal_compliance':
                         if max_distance == 'inf':
                             child.g = 10000
@@ -386,11 +394,19 @@ def best_first_search(plans, plans2, domain, problem, goals, objective='min_avg_
                             child.g = len(child.removed_actions)
                             child.metric = max_distance
                             if max_distance < best_value:
-                                best_node = child
+                                best_node = [child]
                                 best_value = max_distance
                                 print('New best node found')
-                                print(f'Node: {best_node}')
+                                print(f'Sol: {best_node}')
                                 print(f'Metric: {best_value}')
+                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
+                            elif max_distance == best_value:
+                                if child.g <= best_node[0].g:
+                                    best_node.append(child)
+                                    print('Another optimal solution')
+                                    print(f'Sol: {best_node}')
+                                    print(f'Nodes: {expanded_nodes}/{generated_nodes}')
+
                     elif objective == 'max_min_distance_goal_compliance':
                         if min_distance == 'inf':
                             child.g = 10000
@@ -400,11 +416,18 @@ def best_first_search(plans, plans2, domain, problem, goals, objective='min_avg_
                             child.g = len(child.removed_actions)
                             child.metric = max_min_distance
                             if max_min_distance < best_value:
-                                best_node = child
+                                best_node = [child]
                                 best_value = max_min_distance
                                 print('New best node found')
-                                print(f'Node: {best_node}')
+                                print(f'Sol: {best_node}')
                                 print(f'Metric: {best_value}')
+                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
+                            elif max_min_distance == best_value:
+                                if child.g <= best_node[0].g:
+                                    best_node.append(child)
+                                    print('Another optimal solution')
+                                    print(f'Sol: {best_node}')
+                                    print(f'Nodes: {expanded_nodes}/{generated_nodes}')
 
                 else:
                     raise ValueError(f'Objective {objective} not coded yet')
@@ -414,6 +437,9 @@ def best_first_search(plans, plans2, domain, problem, goals, objective='min_avg_
                     heapq.heappush(open_list, child)
                     open_list_set[child] = child.f
                     generated_nodes += 1
-    print('Best Solution Found!')
-    print_solution(best_node, plans, plans2, expanded_nodes, generated_nodes)
-    return best_node.removed_actions
+        if expanded_nodes % 10000 == 0:
+            print(f'Nodes: {expanded_nodes}/{generated_nodes}')
+
+    print('State space has been exhausted!')
+    #print_solution(best_node, plans, plans2, expanded_nodes, generated_nodes)
+    return best_node[0].removed_actions

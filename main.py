@@ -1,6 +1,14 @@
 import os
+import sys
 import argparse
+import time
 from domain_dependent_search.search import best_first_search
+
+def get_grounded_actions():
+    infile = open('grounded_actions.txt','r')
+    grounded_actions = infile.readlines()
+    grounded_actions = [x.strip() for x in grounded_actions]
+    return grounded_actions
 
 def get_top_quality_plans(domain, problem, quality_boound):
     '''
@@ -9,9 +17,10 @@ def get_top_quality_plans(domain, problem, quality_boound):
             these plans are also written to a folder called found_plans
     '''
     # Using David Specks approach as it is state of the art, being able to return loopless plans
-    cmd = f'symk/fast-downward.py {domain} {problem} --search "symq-bd(simple=true,plan_selection=top_k(num_plans=infinity),quality={quality_boound})" > /dev/null'
+    cmd = f'../symk/fast-downward.py {domain} {problem} --get_grounded_actions --search "symq-bd(simple=true,plan_selection=top_k(num_plans=infinity),quality={quality_boound})" > /dev/null'
     os.system(cmd)
     plans = []
+    grounded_actions = get_grounded_actions()
     for file in os.listdir('found_plans/'):
         infile = open(f'found_plans/{file}', 'r')
         plan = []
@@ -19,7 +28,7 @@ def get_top_quality_plans(domain, problem, quality_boound):
             if not line.startswith(';'):
                 plan.append(line.strip())
         plans.append(plan)
-    return plans
+    return plans, grounded_actions
 
 def get_goals(goals_file):
     '''
@@ -42,24 +51,30 @@ def main(args):
     '''
     input: args
     '''
-    domain_file = args.domain
-    problem_file = args.problem
-    goals_file = args.goals
+
+    print('Input')
+    domain_file = f'../{args.domain}'
+    print(f'Domain File: {domain_file}')
+    problem_file = f'../{args.problem}'
+    print(f'Problem File: {problem_file}')
+    goals_file = f'../{args.goals}'
+    print(f'Goals File: {goals_file}')
     quality_bound = args.quality_bound
-    suboptimality_bound = 2.0
-    
+    print(f'Quality Bound: {quality_bound}')
+    metric = args.metric
+    print(f'Metric: {metric}')
+
+
     goals  = get_goals(goals_file)
-    states_by_goal = {
-        k: [] for k in goals
-    }
+    print(f'True Goal: {goals[0]}')
     plans_by_goal = {
         k: [] for k in goals
     }
     suboptimal_plans_by_goal = {
         k: [] for k in goals
     }
-    os.system('rm found_plans/*')
-    print('Computing top-quality plans...')
+    print('\nComputing top-quality plans...')
+    start_top_quality = time.time()
     for index, goal in enumerate(goals):
         original_problem = open(problem_file).read()
         new_problem = original_problem.replace('<HYPOTHESIS>', goal)
@@ -67,20 +82,17 @@ def main(args):
         outfile = open(new_problem_file, 'w+')
         outfile.write(new_problem)
         outfile.close()
-        plans = get_top_quality_plans(domain_file, new_problem_file, quality_bound)
-        suboptimal_plans = []
-        if suboptimality_bound > 1:
-            suboptimal_plans = get_top_quality_plans(domain_file, new_problem_file, suboptimality_bound)
-        #states_visited_by_plans = get_states_visited_by_plan(domain_file, new_problem_file)
-        #states_by_goal[goal] = states_visited_by_plans
+        plans, grounded_actions = get_top_quality_plans(domain_file, new_problem_file, quality_bound)
         plans_by_goal[goal] = plans
-        suboptimal_plans_by_goal[goal] = suboptimal_plans
+    end_top_quality = time.time()
+    print(f'Plans by Goal: {plans_by_goal}')
+    print(f'Grounded Actions: {grounded_actions}')
+    print(f'Top Quality Time: {end_top_quality - start_top_quality}')
 
     # Perform operations over sets of states
-    #intersection = get_intersection(states_by_goal)
-    print('Running Search...')
+    print('\nRunning Search...')
     # Run search to compute the best way of modifying the environmentx
-    best_first_search(plans_by_goal, suboptimal_plans_by_goal, domain_file, problem_file, goals)
+    best_first_search(plans_by_goal, suboptimal_plans_by_goal, domain_file, problem_file, goals, grounded_actions, metric)
 
 if __name__ == '__main__':
     '''
@@ -97,6 +109,7 @@ if __name__ == '__main__':
     parser.add_argument('-p', dest='problem', default='experiments/test/problem.pddl')
     parser.add_argument('-g', dest='goals', default='experiments/test/hyps.dat')
     parser.add_argument('-q', dest='quality_bound', type=float, default=1.0)
+    parser.add_argument('-m', dest='metric', type=str, default='goal_transparency')
 
     args = parser.parse_args()
     main(args)

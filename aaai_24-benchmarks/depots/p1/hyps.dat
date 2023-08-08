@@ -1,0 +1,3 @@
+(and (on crate1 crate0) (on crate0 pallet5))
+(and (on crate1 crate0) (on crate0 pallet3))
+(and (on crate1 crate0) (on crate0 pallet4))

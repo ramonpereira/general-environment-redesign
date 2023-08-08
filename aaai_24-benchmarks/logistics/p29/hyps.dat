@@ -1,0 +1,4 @@
+(and (at obj12 pos12) (at obj21 pos12))
+(and (at obj11 pos12) (at obj13 pos13) (at obj11 pos12) (at obj21 pos11))
+(and (at obj13 pos12) (at obj11 pos13) (at obj21 pos11))
+(and (at obj13 pos13) (at obj12 pos11) (at obj21 pos13))

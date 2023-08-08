@@ -566,6 +566,14 @@ def pddl_to_sas(task):
 
     with timers.timing("Translating task", block=True):
         print('IM REACHING THIS POINT')
+        if options.get_grounded_actions:
+            grounded_actions = []
+            for action in actions:
+                grounded_actions.append(action.name)
+            outfile = open('grounded_actions.txt', 'w+')
+            outfile.write('\n'.join(grounded_actions))
+            outfile.close()
+
         if options.prune_actions:
             actions_to_remove_file = open('actions_to_prune.txt','r')
             actions_to_remove = actions_to_remove_file.readline().strip().split(',')
@@ -573,6 +581,7 @@ def pddl_to_sas(task):
             for action in old_actions:
                 if action.name in actions_to_remove:
                     actions.remove(action)
+
 
         sas_task = translate_task(
             strips_to_sas, ranges, translation_key,

@@ -171,6 +171,8 @@ def _split_planner_args(parser, args):
             curr_options = args.search_options
         elif option == '--prune_actions':
             args.translate_options.append('--prune_actions')
+        elif option == '--get_grounded_actions':
+            args.translate_options.append('--get_grounded_actions')
         else:
             curr_options.append(option)
 

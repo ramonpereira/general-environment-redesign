@@ -11,6 +11,8 @@
 (connected ?x1 - cell ?x2 - cell)
 )
 
+(:functions (total-cost) - number)
+
 (:action move
 :parameters (?x1 - agent ?x2 - cell ?x3 - cell)
 :precondition (and
