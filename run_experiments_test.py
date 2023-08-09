@@ -15,7 +15,7 @@ def alarmHandler(signum, frame):
 
 def process_func(cmd):
     mem_limit = 4000000000
-    time_limit = 1800
+    time_limit = 10
     domain = cmd[0]
     problem = cmd[1]
     metric = cmd[2]
@@ -81,10 +81,10 @@ if __name__ == '__main__':
     num_processes = 6
 
     # Run the processes with the given time and memory limits
-    domains = ['aaai_24-benchmarks/blocks-words']#, 'aaai_24-benchmarks/depots', 'aaai_24-benchmarks/grid-navigation', 'aaai_24-benchmarks/ipc-grid', 'aaai_24-benchmarks/logistics']
-    #domains = ['experiments/test']
-    problems = [f'p{x}' for x in range(1,61)]
-    #problems = [None]
+    #domains = ['aaai_24-benchmarks/blocks-words']#, 'aaai_24-benchmarks/depots', 'aaai_24-benchmarks/grid-navigation', 'aaai_24-benchmarks/ipc-grid', 'aaai_24-benchmarks/logistics']
+    domains = ['experiments/test']
+    #problems = [f'p{x}' for x in range(1,61)]
+    problems = [None]
     metrics = [
         'goal_transparency',
         'goal_privacy',
