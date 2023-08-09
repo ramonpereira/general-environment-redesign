@@ -15,7 +15,7 @@ def alarmHandler(signum, frame):
 
 def process_func(cmd):
     mem_limit = 4 * 1024 * 1024 * 1024
-    time_limit = 1800
+    time_limit = 20
     domain = cmd[0]
     problem = cmd[1]
     metric = cmd[2]

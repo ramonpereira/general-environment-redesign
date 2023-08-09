@@ -141,7 +141,7 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
     else:
         actions = grounded_actions
     print(f'Actions considered: {actions}')
-    if objective == 'goal_transparency':
+    """if objective == 'goal_transparency':
         sorted_actions = list(reversed(sorted(actions, key=lambda x: actions_info[x]['num_goals_present'])))
     elif objective == 'plan_transparency':
         sorted_actions = list(reversed(sorted(actions, key=lambda x: actions_info[x]['num_plans_present'])))
@@ -175,8 +175,9 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
         # TODO: no sorting on this one for now
         sorted_actions = actions
     else:
-        raise ValueError(f'Objective {objective} has not been defined')
+        raise ValueError(f'Objective {objective} has not been defined')"""
 
+    sorted_actions = actions
     # Start node
     start_node = Node(
         parent=None,
