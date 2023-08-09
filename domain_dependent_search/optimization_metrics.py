@@ -222,7 +222,10 @@ def get_distance_GC(node, plans, domain, problem, candidate_goals, true_goal):
         outfile = open(f'found_plans/{plan_id}.txt', 'w+')
         outfile.write('\n'.join(plan))
         outfile.close()
-    os.system('rm found_plans/sas_plan*')
+    try:
+        os.system('rm found_plans/sas_plan*')
+    except:
+        pass
     states = get_states_visited_by_plan(domain, problem)
     distances = {g: [] for g in candidate_goals}
     reachability_check = True

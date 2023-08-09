@@ -140,6 +140,7 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
         actions = list(actions_info.keys())
     else:
         actions = grounded_actions
+    print(f'Actions considered: {actions}')
     if objective == 'goal_transparency':
         sorted_actions = list(reversed(sorted(actions, key=lambda x: actions_info[x]['num_goals_present'])))
     elif objective == 'plan_transparency':
@@ -460,5 +461,7 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
             print(f'Time: {time.time() - search_start}')
 
     print('State space has been exhausted!')
+    print(f'Nodes: {expanded_nodes}/{generated_nodes}')
+    print(f'Time: {time.time() - search_start}')
     #print_solution(best_node, plans, plans2, expanded_nodes, generated_nodes)
     return best_node[0].removed_actions

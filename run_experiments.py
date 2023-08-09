@@ -14,7 +14,7 @@ def alarmHandler(signum, frame):
     raise AlarmException
 
 def process_func(cmd):
-    mem_limit = 4000000000
+    mem_limit = 4 * 1024 * 1024 * 1024
     time_limit = 1800
     domain = cmd[0]
     problem = cmd[1]
@@ -73,6 +73,11 @@ def process_func(cmd):
         return 0
     except AlarmException:
         print('FINISH INSIDE -1')
+        log.close()
+        sys.stdout = sys.__stdout__
+        return -1
+    except ValueError:
+        print('FINISH DUE TO MEMORY')
         log.close()
         sys.stdout = sys.__stdout__
         return -1
