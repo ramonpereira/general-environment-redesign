@@ -25,7 +25,10 @@ def get_states_visited_by_plan(domain, problem):
     output: all the states visited by all the plans that solve the task with the given bound
     '''
     cmd = f'../symk/src/translate/translate.py {domain} {problem} --get-states > /dev/null'
-    os.system(cmd)
+    try:
+        os.system(cmd)
+    except:
+        raise ValueError
     states = []
     infile = open('states.txt')
     for line in infile:
@@ -59,7 +62,10 @@ def compute_distance(node, domain, problem, g, state):
     outfile.close()
     generate_new_problem(problem, state, g)
     cmd = f'../symk/fast-downward.py {domain} new_problem.pddl --search "sym-bd()" --prune_actions > new_problem_output.txt'
-    os.system(cmd)
+    try:
+        os.system(cmd)
+    except:
+        raise ValueError
     try:
         result_file = open('new_problem_output.txt','r')
         result_string = ''.join(result_file.readlines())

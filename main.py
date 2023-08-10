@@ -18,7 +18,10 @@ def get_top_quality_plans(domain, problem, quality_boound):
     '''
     # Using David Specks approach as it is state of the art, being able to return loopless plans
     cmd = f'../symk/fast-downward.py {domain} {problem} --get_grounded_actions --search "symq-bd(simple=true,plan_selection=top_k(num_plans=infinity),quality={quality_boound})" > /dev/null'
-    os.system(cmd)
+    try:
+        os.system(cmd)
+    except:
+        raise ValueError
     plans = []
     grounded_actions = get_grounded_actions()
     for file in os.listdir('found_plans/'):
@@ -47,33 +50,41 @@ def get_intersection(states_by_goal):
     intersection = set.intersection(*map(set, states))
     return intersection
 
-def main(args):
+def main(args, log):
     '''
     input: args
     '''
 
-    print('Input')
+    log.write('Input\n')
+    log.flush()
     domain_file = f'../{args.domain}'
-    print(f'Domain File: {domain_file}')
+    log.write(f'Domain File: {domain_file}\n')
+    log.flush()
     problem_file = f'../{args.problem}'
-    print(f'Problem File: {problem_file}')
+    log.write(f'Problem File: {problem_file}\n')
+    log.flush()
     goals_file = f'../{args.goals}'
-    print(f'Goals File: {goals_file}')
+    log.write(f'Goals File: {goals_file}\n')
+    log.flush()
     quality_bound = args.quality_bound
-    print(f'Quality Bound: {quality_bound}')
+    log.write(f'Quality Bound: {quality_bound}\n')
+    log.flush()
     metric = args.metric
-    print(f'Metric: {metric}')
+    log.write(f'Metric: {metric}\n')
+    log.flush()
 
 
     goals  = get_goals(goals_file)
-    print(f'True Goal: {goals[0]}')
+    log.write(f'True Goal: {goals[0]}\n')
+    log.flush()
     plans_by_goal = {
         k: [] for k in goals
     }
     suboptimal_plans_by_goal = {
         k: [] for k in goals
     }
-    print('\nComputing top-quality plans...')
+    log.write('\nComputing top-quality plans...\n')
+    log.flush()
     start_top_quality = time.time()
     for index, goal in enumerate(goals):
         original_problem = open(problem_file).read()
@@ -85,14 +96,15 @@ def main(args):
         plans, grounded_actions = get_top_quality_plans(domain_file, new_problem_file, quality_bound)
         plans_by_goal[goal] = plans
     end_top_quality = time.time()
-    print(f'Plans by Goal: {plans_by_goal}')
-    print(f'Grounded Actions: {grounded_actions}')
-    print(f'Top Quality Time: {end_top_quality - start_top_quality}')
+    log.write(f'Plans by Goal: {plans_by_goal}\n')
+    log.write(f'Grounded Actions: {grounded_actions}\n')
+    log.write(f'Top Quality Time: {end_top_quality - start_top_quality}\n')
+    log.flush()
 
     # Perform operations over sets of states
-    print('\nRunning Search...')
+    log.write('\nRunning Search...\n')
     # Run search to compute the best way of modifying the environmentx
-    best_first_search(plans_by_goal, suboptimal_plans_by_goal, domain_file, problem_file, goals, grounded_actions, metric)
+    best_first_search(plans_by_goal, suboptimal_plans_by_goal, domain_file, problem_file, goals, grounded_actions, log, metric)
 
 if __name__ == '__main__':
     '''

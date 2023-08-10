@@ -129,7 +129,7 @@ def generate_structured_results(results_path):
     return results
 
 if __name__ == '__main__':
-    results_path = 'batches_1_2'
+    results_path = 'batch_0'
     structured_results = generate_structured_results(results_path)
     structured_results_df = pd.DataFrame(structured_results)
     print()

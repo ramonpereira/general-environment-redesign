@@ -2,8 +2,15 @@ import os
 import shutil
 import argparse
 import time
+import signal
 
 from main import main
+
+class AlarmException(Exception):
+    pass
+
+def alarmHandler(signum, frame):
+    raise AlarmException
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="...")
@@ -25,21 +32,29 @@ if __name__ == '__main__':
         os.system(f'rm -rf {starting_path}/EXECUTION_{experiment_name}')
         os.mkdir(f'{starting_path}/EXECUTION_{experiment_name}')
     os.chdir(f'{starting_path}/EXECUTION_{experiment_name}')
-    log = open(f"results_{domain_name}_{problem_name}_{args.metric}.log", "a")
-    import sys
+    file_name = f"results_{domain_name}_{problem_name}_{args.metric}.log"
+    log = open(file_name, "a")
+    #log = open(f"results_{domain_name}_{problem_name}_{args.metric}.log", "a")
+    #import sys
 
-    sys.stdout = log
+    #sys.stdout = log
 
     # Perform computation
+    signal.signal(signal.SIGALRM, alarmHandler)
+    signal.alarm(1800)
     start_process = time.time()
     try:
         print(os.getcwd())
-        main(args)
-        print(f'Total running time {time.time() - start_process}')
+        main(args, log)
+        log.write(f'Total running time {time.time() - start_process}\n')
+        log.flush()
         log.close()
-        sys.stdout = sys.__stdout__
-    except ValueError:
-        print('FINISH DUE TO MEMORY OR TIME')
-        print(f'Total running time {time.time() - start_process}')
+        #log.close()
+        #sys.stdout = sys.__stdout__
+    except:
+        log.write('FINISH DUE TO MEMORY OR TIME\n')
+        log.write(f'Total running time {time.time() - start_process}\n')
+        log.flush()
         log.close()
-        sys.stdout = sys.__stdout__
+        #log.close()
+        #sys.stdout = sys.__stdout__

@@ -111,22 +111,22 @@ def get_all_metrics(node, plans, plans2, domain, problem, candidate_goals, true_
     avg_distance, min_distance, max_distance = get_distance_GC(node, plans, domain, problem, candidate_goals, true_goal)
     return wcd, wcnd, p_wcd, p_wcnd, wcdecept, wcndecept, avg_distance, min_distance, max_distance
 
-"""def print_solution(node, plans, plans2, expanded_nodes, generated_nodes):
-    print()
-    print('Solution found!')
-    print(str(node))
-    print(f'Solution metric: {node.metric}')
-    print(f'Solution cost: {node.g}')
-    print(f'Number of repairs: {len(node.removed_actions)}')
-    print(f'Expanded nodes: {expanded_nodes}')
-    print(f'Generated nodes: {generated_nodes}')
-    print(f'Valid plans')
+"""def log.write_solution(node, plans, plans2, expanded_nodes, generated_nodes):
+    log.write()
+    log.write('Solution found!')
+    log.write(str(node))
+    log.write(f'Solution metric: {node.metric}')
+    log.write(f'Solution cost: {node.g}')
+    log.write(f'Number of repairs: {len(node.removed_actions)}')
+    log.write(f'Expanded nodes: {expanded_nodes}')
+    log.write(f'Generated nodes: {generated_nodes}')
+    log.write(f'Valid plans')
     valid_plans = generate_valid_plans(node, plans)
     for goal, plans in valid_plans.items():
-        print(f'Goal: {goal}')
-        print(f'Plan: {str(plans)}')"""
+        log.write(f'Goal: {goal}')
+        log.write(f'Plan: {str(plans)}')"""
 
-def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, objective):
+def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, log, objective):
     # Search stats
     search_start = time.time()
     expanded_nodes = 0
@@ -140,7 +140,7 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
         actions = list(actions_info.keys())
     else:
         actions = grounded_actions
-    print(f'Actions considered: {actions}')
+    log.write(f'Actions considered: {actions}\n')
     """if objective == 'goal_transparency':
         sorted_actions = list(reversed(sorted(actions, key=lambda x: actions_info[x]['num_goals_present'])))
     elif objective == 'plan_transparency':
@@ -229,7 +229,8 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
         raise ValueError(f'Objective {objective} not coded')
     start_node.metric = best_value
 
-    print(f'Initial metric value of the environment: {best_value}')
+    log.write(f'Initial metric value of the environment: {best_value}\n')
+    log.flush()
 
 
     # Search structures
@@ -239,16 +240,17 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
 
     while len(open_list) > 0:
         current_node = heapq.heappop(open_list)
+        log.flush()
         # Cost bound condition
         """if len(current_node.removed_actions) == 5:
-            print('Best Solution Found HERE!')
-            print_solution(best_node, plans, plans2, expanded_nodes, generated_nodes)
+            log.write('Best Solution Found HERE!')
+            log.write_solution(best_node, plans, plans2, expanded_nodes, generated_nodes)
             return best_node.removed_actions"""
         expanded_nodes += 1
         closed_list.add(current_node)
         # Removing this so the algorithm becomes anytime
         """if is_goal(current_node, plans, plans2, objective, bounds, domain, problem, candidate_goals, true_goal):
-            print_solution(current_node, plans, plans2, expanded_nodes, generated_nodes)
+            log.write_solution(current_node, plans, plans2, expanded_nodes, generated_nodes)
             return current_node.removed_actions"""
         children = generate_children(current_node, sorted_actions, plans)
         for child in children:
@@ -264,18 +266,18 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
                         if plan_transparency < best_value:
                             best_node = [child]
                             best_value = plan_transparency
-                            print('New best node found')
-                            print(f'Sol: {best_node}')
-                            print(f'Metric: {best_value}')
-                            print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                            print(f'Time: {time.time() - search_start}')
+                            log.write('New best node found\n')
+                            log.write(f'Sol: {best_node}\n')
+                            log.write(f'Metric: {best_value}\n')
+                            log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                            log.write(f'Time: {time.time() - search_start}\n')
                         elif plan_transparency == best_value:
                             if child.g <= best_node[0].g:
                                 best_node.append(child)
-                                print('Another optimal solution')
-                                print(f'Sol: {best_node}')
-                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                                print(f'Time: {time.time() - search_start}')
+                                log.write('Another optimal solution\n')
+                                log.write(f'Sol: {best_node}\n')
+                                log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                                log.write(f'Time: {time.time() - search_start}\n')
 
                 elif objective == 'plan_privacy':
                     aux_plan_privacy = get_p_wcnd(child, plans)
@@ -289,18 +291,18 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
                         if plan_privacy < best_value:
                             best_node = [child]
                             best_value = plan_privacy
-                            print('New best node found')
-                            print(f'Sol: {best_node}')
-                            print(f'Metric: {best_value}')
-                            print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                            print(f'Time: {time.time() - search_start}')
+                            log.write('New best node found\n')
+                            log.write(f'Sol: {best_node}\n')
+                            log.write(f'Metric: {best_value}\n')
+                            log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                            log.write(f'Time: {time.time() - search_start}\n')
                         elif plan_privacy == best_value:
                             if child.g <= best_node[0].g:
                                 best_node.append(child)
-                                print('Another optimal solution')
-                                print(f'Sol: {best_node}')
-                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                                print(f'Time: {time.time() - search_start}')
+                                log.write('Another optimal solution\n')
+                                log.write(f'Sol: {best_node}\n')
+                                log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                                log.write(f'Time: {time.time() - search_start}\n')
 
                 elif objective == 'goal_transparency':
                     # True goal is inferred as soon as possible
@@ -314,18 +316,18 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
                         if goal_transparency < best_value:
                             best_node = [child]
                             best_value = goal_transparency
-                            print('New best node found')
-                            print(f'Sol: {best_node}')
-                            print(f'Metric: {best_value}')
-                            print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                            print(f'Time: {time.time() - search_start}')
+                            log.write('New best node found\n')
+                            log.write(f'Sol: {best_node}\n')
+                            log.write(f'Metric: {best_value}\n')
+                            log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                            log.write(f'Time: {time.time() - search_start}\n')
                         elif goal_transparency == best_value:
                             if child.g <= best_node[0].g:
                                 best_node.append(child)
-                                print('Another optimal solution')
-                                print(f'Sol: {best_node}')
-                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                                print(f'Time: {time.time() - search_start}')
+                                log.write('Another optimal solution\n')
+                                log.write(f'Sol: {best_node}\n')
+                                log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                                log.write(f'Time: {time.time() - search_start}\n')
 
                 elif objective == 'goal_privacy':
                     # True goal is inferred as soon as possible
@@ -340,18 +342,18 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
                         if goal_privacy < best_value:
                             best_node = [child]
                             best_value = goal_privacy
-                            print('New best node found')
-                            print(f'Sol: {best_node}')
-                            print(f'Metric: {best_value}')
-                            print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                            print(f'Time: {time.time() - search_start}')
+                            log.write('New best node found\n')
+                            log.write(f'Sol: {best_node}\n')
+                            log.write(f'Metric: {best_value}\n')
+                            log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                            log.write(f'Time: {time.time() - search_start}\n')
                         elif goal_privacy == best_value:
                             if child.g <= best_node[0].g:
                                 best_node.append(child)
-                                print('Another optimal solution')
-                                print(f'Sol: {best_node}')
-                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                                print(f'Time: {time.time() - search_start}')
+                                log.write('Another optimal solution\n')
+                                log.write(f'Sol: {best_node}\n')
+                                log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                                log.write(f'Time: {time.time() - search_start}\n')
 
                 elif 'goal_compliance' in objective:
                     avg_distance, min_distance, max_distance = get_distance_GC(child, plans, domain, problem, candidate_goals, true_goal)
@@ -365,18 +367,18 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
                             if avg_distance < best_value:
                                 best_node = [child]
                                 best_value = avg_distance
-                                print('New best node found')
-                                print(f'Sol: {best_node}')
-                                print(f'Metric: {best_value}')
-                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                                print(f'Time: {time.time() - search_start}')
+                                log.write('New best node found\n')
+                                log.write(f'Sol: {best_node}\n')
+                                log.write(f'Metric: {best_value}\n')
+                                log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                                log.write(f'Time: {time.time() - search_start}\n')
                             elif avg_distance == best_value:
                                 if child.g <= best_node[0].g:
                                     best_node.append(child)
-                                    print('Another optimal solution')
-                                    print(f'Sol: {best_node}')
-                                    print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                                    print(f'Time: {time.time() - search_start}')
+                                    log.write('Another optimal solution\n')
+                                    log.write(f'Sol: {best_node}\n')
+                                    log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                                    log.write(f'Time: {time.time() - search_start}\n')
 
                     elif objective == 'max_avg_distance_goal_compliance':
                         if avg_distance == 'inf':
@@ -389,18 +391,18 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
                             if max_avg_distance < best_value:
                                 best_node = [child]
                                 best_value = max_avg_distance
-                                print('New best node found')
-                                print(f'Sol: {best_node}')
-                                print(f'Metric: {best_value}')
-                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                                print(f'Time: {time.time() - search_start}')
+                                log.write('New best node found\n')
+                                log.write(f'Sol: {best_node}\n')
+                                log.write(f'Metric: {best_value}\n')
+                                log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                                log.write(f'Time: {time.time() - search_start}\n')
                             elif max_avg_distance == best_value:
                                 if child.g <= best_node[0].g:
                                     best_node.append(child)
-                                    print('Another optimal solution')
-                                    print(f'Sol: {best_node}')
-                                    print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                                    print(f'Time: {time.time() - search_start}')
+                                    log.write('Another optimal solution\n')
+                                    log.write(f'Sol: {best_node}\n')
+                                    log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                                    log.write(f'Time: {time.time() - search_start}\n')
 
                     elif objective == 'min_max_distance_goal_compliance':
                         if max_distance == 'inf':
@@ -412,18 +414,18 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
                             if max_distance < best_value:
                                 best_node = [child]
                                 best_value = max_distance
-                                print('New best node found')
-                                print(f'Sol: {best_node}')
-                                print(f'Metric: {best_value}')
-                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                                print(f'Time: {time.time() - search_start}')
+                                log.write('New best node found\n')
+                                log.write(f'Sol: {best_node}\n')
+                                log.write(f'Metric: {best_value}\n')
+                                log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                                log.write(f'Time: {time.time() - search_start}\n')
                             elif max_distance == best_value:
                                 if child.g <= best_node[0].g:
                                     best_node.append(child)
-                                    print('Another optimal solution')
-                                    print(f'Sol: {best_node}')
-                                    print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                                    print(f'Time: {time.time() - search_start}')
+                                    log.write('Another optimal solution\n')
+                                    log.write(f'Sol: {best_node}\n')
+                                    log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                                    log.write(f'Time: {time.time() - search_start}\n')
 
                     elif objective == 'max_min_distance_goal_compliance':
                         if min_distance == 'inf':
@@ -436,18 +438,18 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
                             if max_min_distance < best_value:
                                 best_node = [child]
                                 best_value = max_min_distance
-                                print('New best node found')
-                                print(f'Sol: {best_node}')
-                                print(f'Metric: {best_value}')
-                                print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                                print(f'Time: {time.time() - search_start}')
+                                log.write('New best node found\n')
+                                log.write(f'Sol: {best_node}\n')
+                                log.write(f'Metric: {best_value}\n')
+                                log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                                log.write(f'Time: {time.time() - search_start}\n')
                             elif max_min_distance == best_value:
                                 if child.g <= best_node[0].g:
                                     best_node.append(child)
-                                    print('Another optimal solution')
-                                    print(f'Sol: {best_node}')
-                                    print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-                                    print(f'Time: {time.time() - search_start}')
+                                    log.write('Another optimal solution\n')
+                                    log.write(f'Sol: {best_node}\n')
+                                    log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+                                    log.write(f'Time: {time.time() - search_start}\n')
 
                 else:
                     raise ValueError(f'Objective {objective} not coded yet')
@@ -458,11 +460,11 @@ def best_first_search(plans, plans2, domain, problem, goals, grounded_actions, o
                     open_list_set[child] = child.f
                     generated_nodes += 1
         if expanded_nodes % 10000 == 0:
-            print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-            print(f'Time: {time.time() - search_start}')
+            log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+            log.write(f'Time: {time.time() - search_start}\n')
 
-    print('State space has been exhausted!')
-    print(f'Nodes: {expanded_nodes}/{generated_nodes}')
-    print(f'Time: {time.time() - search_start}')
-    #print_solution(best_node, plans, plans2, expanded_nodes, generated_nodes)
+    log.write('State space has been exhausted!\n')
+    log.write(f'Nodes: {expanded_nodes}/{generated_nodes}\n')
+    log.write(f'Time: {time.time() - search_start}\n')
+    #log.write_solution(best_node, plans, plans2, expanded_nodes, generated_nodes)
     return best_node[0].removed_actions
