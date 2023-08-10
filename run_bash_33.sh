@@ -50,3 +50,4 @@
 (ulimit -v 4000000; nohup python3 run_experiments_from_bash.py -d aaai_24-benchmarks/ipc-grid/p33/domain.pddl -p aaai_24-benchmarks/ipc-grid/p33/template.pddl -g aaai_24-benchmarks/ipc-grid/p33/hyps.dat -m goal_privacy) &
 (ulimit -v 4000000; nohup python3 run_experiments_from_bash.py -d aaai_24-benchmarks/ipc-grid/p33/domain.pddl -p aaai_24-benchmarks/ipc-grid/p33/template.pddl -g aaai_24-benchmarks/ipc-grid/p33/hyps.dat -m plan_transparency) &
 (ulimit -v 4000000; nohup python3 run_experiments_from_bash.py -d aaai_24-benchmarks/ipc-grid/p33/domain.pddl -p aaai_24-benchmarks/ipc-grid/p33/template.pddl -g aaai_24-benchmarks/ipc-grid/p33/hyps.dat -m plan_privacy) &
+wait

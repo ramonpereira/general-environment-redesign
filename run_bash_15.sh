@@ -50,3 +50,4 @@
 (ulimit -v 4000000; nohup python3 run_experiments_from_bash.py -d aaai_24-benchmarks/depots/p40/domain.pddl -p aaai_24-benchmarks/depots/p40/template.pddl -g aaai_24-benchmarks/depots/p40/hyps.dat -m max_avg_distance_goal_compliance) &
 (ulimit -v 4000000; nohup python3 run_experiments_from_bash.py -d aaai_24-benchmarks/depots/p40/domain.pddl -p aaai_24-benchmarks/depots/p40/template.pddl -g aaai_24-benchmarks/depots/p40/hyps.dat -m min_max_distance_goal_compliance) &
 (ulimit -v 4000000; nohup python3 run_experiments_from_bash.py -d aaai_24-benchmarks/depots/p40/domain.pddl -p aaai_24-benchmarks/depots/p40/template.pddl -g aaai_24-benchmarks/depots/p40/hyps.dat -m max_min_distance_goal_compliance) &
+wait

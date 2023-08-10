@@ -50,3 +50,4 @@
 (ulimit -v 4000000; nohup python3 run_experiments_from_bash.py -d aaai_24-benchmarks/depots/p21/domain.pddl -p aaai_24-benchmarks/depots/p21/template.pddl -g aaai_24-benchmarks/depots/p21/hyps.dat -m max_min_distance_goal_compliance) &
 (ulimit -v 4000000; nohup python3 run_experiments_from_bash.py -d aaai_24-benchmarks/depots/p22/domain.pddl -p aaai_24-benchmarks/depots/p22/template.pddl -g aaai_24-benchmarks/depots/p22/hyps.dat -m goal_transparency) &
 (ulimit -v 4000000; nohup python3 run_experiments_from_bash.py -d aaai_24-benchmarks/depots/p22/domain.pddl -p aaai_24-benchmarks/depots/p22/template.pddl -g aaai_24-benchmarks/depots/p22/hyps.dat -m goal_privacy) &
+wait
