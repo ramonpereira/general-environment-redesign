@@ -88,7 +88,10 @@ def main(args, log):
     start_top_quality = time.time()
     for index, goal in enumerate(goals):
         original_problem = open(problem_file).read()
-        new_problem = original_problem.replace('<HYPOTHESIS>', goal)
+        if '<HYPOTHESIS>' in original_problem:
+            new_problem = original_problem.replace('<HYPOTHESIS>', goal)
+        else:
+            new_problem = original_problem.replace('<hypothesis>', goal)
         new_problem_file = problem_file.replace('.pddl',f'_{index}.pddl')
         outfile = open(new_problem_file, 'w+')
         outfile.write(new_problem)
@@ -117,11 +120,22 @@ if __name__ == '__main__':
     '''
     parser = argparse.ArgumentParser(description="...")
 
-    parser.add_argument('-d', dest='domain', default='experiments/test/domain.pddl')
-    parser.add_argument('-p', dest='problem', default='experiments/test/problem.pddl')
-    parser.add_argument('-g', dest='goals', default='experiments/test/hyps.dat')
+    parser.add_argument('-d', dest='domain', default='aaai_24-benchmarks/depots/p1/domain.pddl')
+    parser.add_argument('-p', dest='problem', default='aaai_24-benchmarks/depots/p1/template.pddl')
+    parser.add_argument('-g', dest='goals', default='aaai_24-benchmarks/depots/p1/hyps.dat')
     parser.add_argument('-q', dest='quality_bound', type=float, default=1.0)
     parser.add_argument('-m', dest='metric', type=str, default='goal_transparency')
 
     args = parser.parse_args()
-    main(args)
+
+    experiment_name = f'test'
+    starting_path = os.getcwd()
+    try:
+        os.mkdir(f'{starting_path}/EXECUTION_{experiment_name}')
+    except:
+        os.system(f'rm -rf {starting_path}/EXECUTION_{experiment_name}')
+        os.mkdir(f'{starting_path}/EXECUTION_{experiment_name}')
+    os.chdir(f'{starting_path}/EXECUTION_{experiment_name}')
+    log = open('test', 'a')
+    main(args, log)
+    print()
