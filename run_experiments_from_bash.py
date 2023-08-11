@@ -41,10 +41,10 @@ if __name__ == '__main__':
 
     # Perform computation
     signal.signal(signal.SIGALRM, alarmHandler)
-    signal.alarm(1800)
+    signal.alarm(900)
     start_process = time.time()
     try:
-        print(os.getcwd())
+        print(f'DOING {os.getcwd()}')
         main(args, log)
         log.write(f'Total running time {time.time() - start_process}\n')
         log.flush()
