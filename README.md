@@ -1,6 +1,6 @@
-# Environment Redesign as Planning
+# .
 
-Environment Redesign as Planning: Redesigning environments for cooperative and adversarial environment settings and different intepretable behaviours. 
+. 
 
 ## Goal Recognition Design 
 
