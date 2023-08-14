@@ -49,6 +49,10 @@ if __name__ == '__main__':
         log.write(f'Total running time {time.time() - start_process}\n')
         log.flush()
         log.close()
+        try:
+            os.system('rm -rf found_plans/')
+        except:
+            pass
         #log.close()
         #sys.stdout = sys.__stdout__
     except:
@@ -56,5 +60,9 @@ if __name__ == '__main__':
         log.write(f'Total running time {time.time() - start_process}\n')
         log.flush()
         log.close()
+        try:
+            os.system('rm -rf found_plans/')
+        except:
+            pass
         #log.close()
         #sys.stdout = sys.__stdout__

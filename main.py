@@ -17,7 +17,7 @@ def get_top_quality_plans(domain, problem, quality_boound):
             these plans are also written to a folder called found_plans
     '''
     # Using David Specks approach as it is state of the art, being able to return loopless plans
-    cmd = f'../symk/fast-downward.py {domain} {problem} --get_grounded_actions --search "symq-bd(simple=true,plan_selection=top_k(num_plans=infinity),quality={quality_boound})" > /dev/null'
+    cmd = f'../symk/fast-downward.py {domain} {problem} --get_grounded_actions --search "symq-bd(simple=true,plan_selection=top_k(num_plans={1000}),quality={quality_boound})" > /dev/null'
     try:
         os.system(cmd)
     except:
