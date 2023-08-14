@@ -86,21 +86,21 @@ if __name__ == '__main__':
     num_processes = 1
 
     # Run the processes with the given time and memory limits
-    domains = ['aaai_24-benchmarks/blocks-words']#, 'aaai_24-benchmarks/depots', 'aaai_24-benchmarks/grid-navigation', 'aaai_24-benchmarks/ipc-grid', 'aaai_24-benchmarks/logistics']
-    #domains = ['experiments/test']
-    #problems = [f'p{x}' for x in range(1,61)]
+    domains = ['aaai_24-benchmarks/blocks-words']
     problems = ['p15']
     #problems = [None]
     metrics = [
-        #'goal_transparency',
-        #'goal_privacy',
-        #'plan_transparency',
-        #'plan_privacy',
-        'min_avg_distance_goal_compliance',
-        #'max_avg_distance_goal_compliance',
-        #'min_max_distance_goal_compliance',
-        #'max_min_distance_goal_compliance'
+        'goal_transparency',
+        'goal_privacy',
+        'plan_transparency',
+        'plan_privacy'
     ]
+    """metrics = [
+        'min_avg_distance_goal_compliance',
+        'max_avg_distance_goal_compliance',
+        'min_max_distance_goal_compliance',
+        'max_min_distance_goal_compliance'
+    ]"""
     starting_path = os.getcwd()
     cmds = [(d,p,m,starting_path) for d in domains for p in problems for m in metrics]
     chunked_cmd = [cmds[i*num_processes:(i+1) * num_processes] for i in range((len(cmds) + num_processes - 1) // num_processes)]

@@ -1,0 +1,250 @@
+
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 10
+---- > exploring op_comb: [[unstack s a ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[unstack s a a h ]]---- > exploring op_comb: [[stack s c ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[stack s c a h ]]---- > exploring op_comb: [[unstack a h ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[unstack a h s c ]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[unstack t r e a ]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[unstack e a a p ]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[unstack a p e a ]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[stack a r e a ]]---- > exploring op_comb: [[stack e a ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[stack e a t e ]]---- > exploring op_comb: [[stack t e ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[stack t e a t ]]---- > exploring op_comb: [[stack a t ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[stack a t e a ]]---- > exploring op_comb: [[stack p e ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[unstack t r e a ]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[unstack e a a p ]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[unstack a p e a ]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[stack a r e a ]]---- > exploring op_comb: [[stack e a ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[stack e a t e ]]---- > exploring op_comb: [[stack t e ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[stack t e a t ]]---- > exploring op_comb: [[stack a t ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[stack a t e a ]]---- > exploring op_comb: [[stack p e ]--[]--[]--[]]
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+145
+1
+1
+145
+1
+145
+145
+145
+145
+145
+145
+145
+145
+145
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+In grd_wcd_reduction: Caught exception: Error: unknown type none used in object definition!
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+In grd_wcd_reduction: Caught exception: Error: unknown type none used in object definition!
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+In grd_wcd_reduction: Caught exception: Error: unknown type none used in object definition!
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+In grd_wcd_reduction: Caught exception: Error: unknown type none used in object definition!
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+1
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+In grd_wcd_reduction: Caught exception: Error: unknown type none used in object definition!
+1
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+In grd_wcd_reduction: Caught exception: Error: unknown type none used in object definition!
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+In grd_wcd_reduction: Caught exception: Error: unknown type none used in object definition!
+145
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+In grd_wcd_reduction: Caught exception: Error: unknown type none used in object definition!
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 4
+---- > exploring op_comb: [[move baby1 2_0 2_1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[put-down t ]--[]--[]--[]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[put-down e ]--[]--[]--[]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[put-down t ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[put-down t ]--[]--[]--[]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[put-down e ]--[]--[]--[]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e ]--[]--[]--[]]Updating value for budget::: reduction_per_budget_exhausted[1] = 3
+---- > exploring op_comb: [[stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[stack t e ]--[]--[]--[]]---- > exploring op_comb: [[stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[stack p e ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[put-down t ]--[]--[]--[]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[put-down e ]--[]--[]--[]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e ]--[]--[]--[]]Updating value for budget::: reduction_per_budget_exhausted[1] = 3
+---- > exploring op_comb: [[stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[stack t e ]--[]--[]--[]]---- > exploring op_comb: [[stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[stack p e ]--[]--[]--[]]Inserting value for budget: reduction_per_budget_exhausted[2] = 3
+---- > exploring op_comb: [[pick-up e unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e put-down t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack t e ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack p e ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[put-down t ]--[]--[]--[]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[put-down e ]--[]--[]--[]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e ]--[]--[]--[]]Updating value for budget::: reduction_per_budget_exhausted[1] = 3
+---- > exploring op_comb: [[stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[stack t e ]--[]--[]--[]]---- > exploring op_comb: [[stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[stack p e ]--[]--[]--[]]Inserting value for budget: reduction_per_budget_exhausted[2] = 3
+---- > exploring op_comb: [[pick-up e unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e put-down t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack t e ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack p e ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[put-down t ]--[]--[]--[]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[put-down e ]--[]--[]--[]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e ]--[]--[]--[]]Updating value for budget::: reduction_per_budget_exhausted[1] = 3
+---- > exploring op_comb: [[stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[stack t e ]--[]--[]--[]]---- > exploring op_comb: [[stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[stack p e ]--[]--[]--[]]Inserting value for budget: reduction_per_budget_exhausted[2] = 3
+---- > exploring op_comb: [[pick-up e unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e put-down t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e t ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[put-down t ]--[]--[]--[]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[put-down e ]--[]--[]--[]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e ]--[]--[]--[]]Updating value for budget::: reduction_per_budget_exhausted[1] = 3
+---- > exploring op_comb: [[stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[stack t e ]--[]--[]--[]]---- > exploring op_comb: [[stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[stack p e ]--[]--[]--[]]Inserting value for budget: reduction_per_budget_exhausted[2] = 3
+---- > exploring op_comb: [[pick-up e unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e put-down t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e a ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[put-down t ]--[]--[]--[]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[put-down e ]--[]--[]--[]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[put-down t ]--[]--[]--[]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[put-down e ]--[]--[]--[]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e ]--[]--[]--[]]Updating value for budget::: reduction_per_budget_exhausted[1] = 3
+---- > exploring op_comb: [[stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[stack t e ]--[]--[]--[]]---- > exploring op_comb: [[stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[stack p e ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[put-down t ]--[]--[]--[]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[put-down e ]--[]--[]--[]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e ]--[]--[]--[]]Updating value for budget::: reduction_per_budget_exhausted[1] = 3
+---- > exploring op_comb: [[stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[stack t e ]--[]--[]--[]]---- > exploring op_comb: [[stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[stack p e ]--[]--[]--[]]Inserting value for budget: reduction_per_budget_exhausted[2] = 3
+---- > exploring op_comb: [[pick-up e unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e put-down t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack t e ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack p e ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[put-down t ]--[]--[]--[]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[put-down e ]--[]--[]--[]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e ]--[]--[]--[]]Updating value for budget::: reduction_per_budget_exhausted[1] = 3
+---- > exploring op_comb: [[stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[stack t e ]--[]--[]--[]]---- > exploring op_comb: [[stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[stack p e ]--[]--[]--[]]Inserting value for budget: reduction_per_budget_exhausted[2] = 3
+---- > exploring op_comb: [[pick-up e unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e put-down t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack t e ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack p e ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[put-down t ]--[]--[]--[]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[put-down e ]--[]--[]--[]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e ]--[]--[]--[]]Updating value for budget::: reduction_per_budget_exhausted[1] = 3
+---- > exploring op_comb: [[stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[stack t e ]--[]--[]--[]]---- > exploring op_comb: [[stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[stack p e ]--[]--[]--[]]Inserting value for budget: reduction_per_budget_exhausted[2] = 3
+---- > exploring op_comb: [[pick-up e unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e put-down t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack t e ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack p e ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[put-down t ]--[]--[]--[]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[put-down e ]--[]--[]--[]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e ]--[]--[]--[]]Updating value for budget::: reduction_per_budget_exhausted[1] = 3
+---- > exploring op_comb: [[stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[stack t e ]--[]--[]--[]]---- > exploring op_comb: [[stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[stack p e ]--[]--[]--[]]Inserting value for budget: reduction_per_budget_exhausted[2] = 3
+---- > exploring op_comb: [[pick-up e unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e put-down t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack t e ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack e r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e unstack e r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e stack p e ]--[]--[]--[]]
+145
+145
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 7
+---- > exploring op_comb: [[lift hoist0 crate0 pallet1 depot1 ]--[]--[]--[]]---- > exploring op_comb: [[lift hoist1 crate1 pallet0 depot0 ]--[]--[]--[]]---- > exploring op_comb: [[load hoist0 crate0 truck0 depot1 ]--[]--[]--[]]---- > exploring op_comb: [[drive truck0 depot1 depot0 ]--[]--[]--[]]---- > exploring op_comb: [[load hoist1 crate1 truck0 depot0 ]--[]--[]--[]]---- > exploring op_comb: [[drive truck0 depot0 distributor1 ]--[]--[]--[]]---- > exploring op_comb: [[unload hoist2 crate0 truck0 distributor1 ]--[]--[]--[]]---- > exploring op_comb: [[drop hoist2 crate0 pallet5 distributor1 ]--[]--[]--[]]---- > exploring op_comb: [[unload hoist2 crate1 truck0 distributor1 ]--[]--[]--[]]---- > exploring op_comb: [[drop hoist2 crate1 crate0 distributor1 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 2
+---- > exploring op_comb: [[move p0 c21 c11 ]--[]--[]--[]]---- > exploring op_comb: [[move p0 c11 c01 ]--[]--[]--[]]---- > exploring op_comb: [[move p0 c01 c00 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 2
+---- > exploring op_comb: [[move p0 c21 c11 ]--[]--[]--[]]---- > exploring op_comb: [[move p0 c11 c01 ]--[]--[]--[]]---- > exploring op_comb: [[move p0 c01 c00 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 9
+---- > exploring op_comb: [[move place_0_0 place_1_0 ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[move place_0_0 place_1_0 place_1_0 place_2_0 ]]---- > exploring op_comb: [[move place_1_0 place_2_0 ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[move place_1_0 place_2_0 place_2_0 place_3_0 ]]---- > exploring op_comb: [[move place_2_0 place_3_0 ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[move place_2_0 place_3_0 place_3_0 place_3_1 ]]---- > exploring op_comb: [[pickup place_3_0 key_1 ]--[]--[]--[]]---- > exploring op_comb: [[move place_3_0 place_3_1 ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[move place_3_0 place_3_1 place_3_1 place_3_2 ]]---- > exploring op_comb: [[unlock place_3_1 place_3_2 key_1 shape_1 ]--[]--[]--[]]---- > exploring op_comb: [[move place_3_1 place_3_2 ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[move place_3_1 place_3_2 place_3_2 place_3_3 ]]---- > exploring op_comb: [[move place_3_2 place_3_3 ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[move place_3_2 place_3_3 place_3_3 place_3_4 ]]---- > exploring op_comb: [[move place_3_3 place_3_4 ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[move place_3_3 place_3_4 place_3_4 place_3_3 ]]---- > exploring op_comb: [[pickup place_3_4 key_4 ]--[]--[]--[]]---- > exploring op_comb: [[move place_3_4 place_3_3 ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[move place_3_4 place_3_3 place_3_3 place_3_2 ]]---- > exploring op_comb: [[move place_3_3 place_3_2 ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 9
+---- > exploring op_comb: [[move place_0_0 place_1_0 ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[move place_0_0 place_1_0 place_1_0 place_2_0 ]]---- > exploring op_comb: [[move place_1_0 place_2_0 ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[move place_1_0 place_2_0 place_2_0 place_3_0 ]]---- > exploring op_comb: [[move place_2_0 place_3_0 ]--[]--[]--[]]
+145
+145
+145
+145
+145
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 9
+---- > exploring op_comb: [[move place_0_0 place_1_0 ]--[]--[]--[]]---- > exploring op_comb: [[]--[]--[]--[move place_0_0 place_1_0 place_1_0 place_2_0 ]]---- > exploring op_comb: [[move place_1_0 place_2_0 ]--[]--[]--[]]
+145
+145
+1
+145
+145
+145
+145
+145
+145
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 5
+---- > exploring op_comb: [[unstack t r ]--[]--[]--[]]---- > exploring op_comb: [[put-down t ]--[]--[]--[]]---- > exploring op_comb: [[unstack e a ]--[]--[]--[]]---- > exploring op_comb: [[put-down e ]--[]--[]--[]]---- > exploring op_comb: [[unstack a p ]--[]--[]--[]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up e ]--[]--[]--[]]Updating value for budget::: reduction_per_budget_exhausted[1] = 3
+---- > exploring op_comb: [[stack e a ]--[]--[]--[]]---- > exploring op_comb: [[pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[stack t e ]--[]--[]--[]]---- > exploring op_comb: [[stack a t ]--[]--[]--[]]---- > exploring op_comb: [[pick-up p ]--[]--[]--[]]---- > exploring op_comb: [[stack p e ]--[]--[]--[]]
+145Inserting value for budget: reduction_per_budget_exhausted[1] = 3
+---- > exploring op_comb: [[unstack e r ]--[]--[]--[]]---- > exploring op_comb: [[put-down e ]--[]--[]--[]]---- > exploring op_comb: [[pick-up r ]--[]--[]--[]]---- > exploring op_comb: [[stack r a ]--[]--[]--[]]---- > exploring op_comb: [[stack r e ]--[]--[]--[]]---- > exploring op_comb: [[unstack a t ]--[]--[]--[]]---- > exploring op_comb: [[stack a r ]--[]--[]--[]]---- > exploring op_comb: [[pick-up t ]--[]--[]--[]]---- > exploring op_comb: [[stack t a ]--[]--[]--[]]

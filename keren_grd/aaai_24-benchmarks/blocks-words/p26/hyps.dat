@@ -1,0 +1,4 @@
+(clear t),(on t a),(on a p),(on p e),(ontable e)
+(clear p),(on p e),(on e r),(on r t),(ontable t)
+(clear t),(on t r),(on r a),(on a p),(ontable p)
+(clear r),(on r a),(on a p),(on p t),(ontable t)

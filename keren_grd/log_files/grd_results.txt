@@ -1,0 +1,580 @@
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: [Errno 2] No such file or directory: '/Users/albertopozancolancho/Desktop/planning-project/keren_grd/hyp_@_A_@_B.dat'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: [Errno 2] No such file or directory: '/Users/albertopozancolancho/Desktop/planning-project/keren_grd/hyp_@_A_@_B.dat'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: [Errno 2] No such file or directory: '/Users/albertopozancolancho/Desktop/planning-project/keren_grd/hyp_@_A_@_B.dat'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: [Errno 2] No such file or directory: '/Users/albertopozancolancho/Desktop/planning-project/keren_grd/hyp_@_A_@_B.dat'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: [Errno 2] No such file or directory: '/Users/albertopozancolancho/Desktop/planning-project/keren_grd/hyp_@_A_@_B.dat'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: [Errno 2] No such file or directory: 'hyp_@_A_@_B.dat'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: [Errno 2] No such file or directory: '/Users/albertopozancolancho/Desktop/planning-project/aaai_24-benchmarks/test/p1/hyps.dat'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: [Errno 2] No such file or directory: '/Users/albertopozancolancho/Desktop/planning-project/aaai_24-benchmarks/test/p1/template.pddl'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: Error found invalid keyword when parsing GoalStmtExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: 'Error: object 0_5 referenced in problem definition - but not defined'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: argument of type 'NoneType' is not iterableExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: argument of type 'NoneType' is not iterableExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: argument of type 'NoneType' is not iterableExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: argument of type 'NoneType' is not iterableExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: argument of type 'NoneType' is not iterableExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: argument of type 'NoneType' is not iterableExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: argument of type 'NoneType' is not iterableExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+Initial metric: 16680
+New metric: 16680
+Expanded nodes: 0
+Generated nodes: 2
+Solution: []
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: not all arguments converted during string formattingExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 10 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: not all arguments converted during string formattingExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: not all arguments converted during string formattingExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: not all arguments converted during string formattingExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: not all arguments converted during string formattingExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: [Errno 2] No such file or directory: '/Users/albertopozancolancho/Desktop/planning-project/aaai_24-benchmarks/test/p1/hyps.dat'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: [Errno 2] No such file or directory: '/Users/albertopozancolancho/Desktop/planning-project/aaai_24-benchmarks/test/p1/hyps.dat'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: expected str, bytes or os.PathLike object, not NoneTypeExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: expected str, bytes or os.PathLike object, not NoneTypeExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: 'Error: unknown type none used in object definition!'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: 'Error: unknown type none used in object definition!'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: 'Error: unknown type none used in object definition!'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: 'Error: unknown type none used in object definition!'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: 'Error: unknown type none used in object definition!'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] benchmarks/iss-cad/p01/hyps.dat 1 10 NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: 'Error: unknown type none used in object definition!'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: [Errno 2] No such file or directory: '/Users/albertopozancolancho/Desktop/planning-project/keren_grd/hyp_@_A_@_B.dat'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: [Errno 2] No such file or directory: '/Users/albertopozancolancho/Desktop/planning-project/keren_grd/hyp_@_A_@_B.dat'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: 'Error: unknown type none used in object definition!'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 1 NA NA NA 
+---------------------------
+Initial metric: 4
+New metric: 0
+Expanded nodes: 1
+Generated nodes: 4
+Solution: ['move baby1 2_0 2_1']
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/test/p0/hyps.dat 10 NA NA NA 
+---------------------------
+Initial metric: 4
+New metric: 0
+Expanded nodes: 1
+Generated nodes: 4
+Solution: ['move baby1 2_0 2_1']
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: missing closing parenthesisExisting 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+Initial metric: 5
+New metric: 3
+Expanded nodes: 13
+Generated nodes: 84
+Solution: ['pick-up e']
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 10 NA NA NA 
+---------------------------
+Initial metric: 5
+New metric: 3
+Expanded nodes: 28
+Generated nodes: 174
+Solution: ['pick-up e']
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 10 NA NA NA 
+---------------------------
+Initial metric: 5
+New metric: 3
+Expanded nodes: 28
+Generated nodes: 174
+Solution: ['pick-up e']
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 10 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+Initial metric: 5
+New metric: 3
+Expanded nodes: 13
+Generated nodes: 84
+Solution: ['pick-up e']
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 10 NA NA NA 
+---------------------------
+Initial metric: 5
+New metric: 3
+Expanded nodes: 28
+Generated nodes: 174
+Solution: ['pick-up e']
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 10 NA NA NA 
+---------------------------
+Initial metric: 5
+New metric: 3
+Expanded nodes: 28
+Generated nodes: 174
+Solution: ['pick-up e']
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 10 NA NA NA 
+---------------------------
+Initial metric: 5
+New metric: 3
+Expanded nodes: 28
+Generated nodes: 174
+Solution: ['pick-up e']
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 10 NA NA NA 
+---------------------------
+Initial metric: 5
+New metric: 3
+Expanded nodes: 28
+Generated nodes: 174
+Solution: ['pick-up e']
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/logistics/p1/hyps.dat 1 NA NA NA 
+---------------------------
+Initial metric: 16680
+New metric: 16680
+Expanded nodes: 0
+Generated nodes: 6
+Solution: []
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/logistics/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/depots/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/grid-navigation/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: 'Error unknown parent type: place'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/grid-navigation/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: 'Error unknown parent type: place'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/grid-navigation/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: 'Error unknown parent type: place'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/grid-navigation/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: 'Error unknown parent type: place'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/grid-navigation/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: 'Error unknown parent type: place'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/grid-navigation/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/grid-navigation/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/grid-navigation/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/grid-navigation/p1/hyps.dat 1 NA NA NA 
+---------------------------
+In grd_evaluator: Caught excpetion: 'Error unknown parent type: place'Existing 
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/grid-navigation/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/grid-navigation/p1/hyps.dat 1 NA NA NA 
+---------------------------
+Initial metric: 2
+New metric: 1
+Expanded nodes: 3
+Generated nodes: 24
+Solution: ['move p0 c01 c00']
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/grid-navigation/p1/hyps.dat 1 NA NA NA 
+---------------------------
+Initial metric: 2
+New metric: 1
+Expanded nodes: 3
+Generated nodes: 24
+Solution: ['move p0 c01 c00']
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/ipc-grid/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/ipc-grid/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/ipc-grid/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/ipc-grid/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/ipc-grid/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/ipc-grid/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/ipc-grid/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/ipc-grid/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/ipc-grid/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/logistics/p1/hyps.dat 1 NA NA NA 
+---------------------------
+Initial metric: 16680
+New metric: 16680
+Expanded nodes: 0
+Generated nodes: 6
+Solution: []
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/logistics/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/logistics/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/logistics/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/logistics/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/logistics/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/logistics/p1/hyps.dat 1 NA NA NA 
+---------------------------
+Initial metric: 16680
+New metric: 16680
+Expanded nodes: 0
+Generated nodes: 6
+Solution: []
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/logistics/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/logistics/p1/hyps.dat 1 NA NA NA 
+---------------------------
+
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p1/hyps.dat 1 NA NA NA 
+---------------------------
+Initial metric: 5
+New metric: 3
+Expanded nodes: 13
+Generated nodes: 84
+Solution: ['pick-up e']
+Performing:: ['WcdReduce', 'LatestSplit'] ../aaai_24-benchmarks/blocks-words/p2/hyps.dat 1 NA NA NA 
+---------------------------
+Initial metric: 3
+New metric: 3
+Expanded nodes: 9
+Generated nodes: 60
+Solution: []

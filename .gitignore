@@ -15,3 +15,5 @@ symk/src/dd_libs/cudd-3.0.0/aclocal.m4
 symk/src/dd_libs/cudd-3.0.0/configure
 symk/src/dd_libs/cudd-3.0.0/config.h.in
 symk/src/dd_libs/cudd-3.0.0/config.h.in~
+
+keren_grd/src/3rdparty/downward/builds/
