@@ -196,9 +196,13 @@ def generate_big_table(df):
     for domain in domains:
         for m in metrics_order:
             this_results = df[(df['Domain'] == domain) & (df['Metric'] == m)]
+            if len(this_results) != 60:
+                print(f'{domain} does not have the 60 problems for metric {m}, only {len(this_results)}, skipping')
+                continue
             expanded_nodes = []
             times = []
             improvements = []
+            initial_metrics = []
             total_problems = 0
             improved_problems = 0
             for index, row in this_results.iterrows():
@@ -209,27 +213,33 @@ def generate_big_table(df):
                 best_metric, best_time, best_expanded = get_first_best_sol(solution_history)
                 if best_metric != None: # i.e., we are only reporting problems for which we find improvements
                     improved_problems += 1
-                    improvement = abs(best_metric - initial_metric)
+                    improvement = best_metric
                     expanded_nodes.append(best_expanded)
                     times.append(best_time)
                     improvements.append(improvement)
+                    initial_metrics.append(initial_metric)
             if len(times) > 0:
-                avg_time = round(statistics.mean(times),2)
+                avg_time = round(statistics.mean(times),1)
                 std_time = 0.0
                 if len(times) > 1:
-                    std_time = round(statistics.stdev(times),2)
-                avg_expanded = round(statistics.mean(expanded_nodes),2)
+                    std_time = round(statistics.stdev(times),1)
+                avg_expanded = round(statistics.mean(expanded_nodes),1)
                 std_expanded = 0.0
                 if len(expanded_nodes) > 1:
-                    std_expanded = round(statistics.stdev(expanded_nodes),2)
-                avg_improvement = round(statistics.mean(improvements),2)
+                    std_expanded = round(statistics.stdev(expanded_nodes),1)
+                avg_improvement = round(statistics.mean(improvements),1)
                 std_improvement = 0.0
                 if len(improvements) > 1:
-                    std_improvement = round(statistics.stdev(improvements),2)
-                print(f'{avg_time}\pm{std_time} & {avg_expanded}\pm{std_expanded} & {avg_improvement}\pm{std_improvement} & {improved_problems}/{total_problems}\\\\')
+                    std_improvement = round(statistics.stdev(improvements),1)
+                avg_initial_metric = round(statistics.mean(initial_metrics),1)
+                std_initial_metric = 0.0
+                if len(initial_metrics) > 1:
+                    std_initial_metric = round(statistics.stdev(initial_metrics),1)
+                #print(f'{avg_time}\pm{std_time} & {avg_expanded}\pm{std_expanded} & {avg_improvement}\pm{std_improvement} & {improved_problems}/{total_problems}\\\\')
+                print(f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&',end='')
             else:
-                print(f'- & - & - & {improved_problems}/{total_problems}\\\\')
-
+                print(f'- & - & - &',end='')
+        print('\\\\')
 
 def generate_reduction_per_g_violinplot(df):
     print()
