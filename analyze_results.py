@@ -120,6 +120,44 @@ def process_results_file(results_file):
             pass
     return results
 
+def process_results_file_keren(results_file):
+    infile = open(results_file, 'r')
+    aux = results_file.split('/')[1].split('_')
+    domain = aux[0]
+    problem = aux[1]
+    results = {}
+    results['Domain'] = domain
+    results['Problem'] = problem.replace('.log','')
+    best_sol = None
+    best_time = None
+    best_expanded = None
+    best_generated = None
+    for line in infile:
+        if 'init wcd: ' in line:
+            initial_metric = float(line.split(' ')[2])
+            results['Initial Metric'] = initial_metric
+        elif 'reduced from' in line:
+            best_sol = float(line.split(' ')[6])
+            best_time = 900 - float(line.split(' ')[9])
+        elif 'Expanded' in line:
+            best_expanded = int(line.split(' ')[-1].strip())
+        elif 'Generated' in line:
+            best_generated = int(line.split(' ')[-1].strip())
+    results['Sol Time'] = best_time
+    results['Sol Metric'] = best_sol
+    results['Expanded Nodes'] = best_expanded
+    results['Generated Nodes'] = best_generated
+    return results
+
+def generate_structured_results_keren(results_path):
+    results = []
+    print(f'There are {len(os.listdir(results_path))} experiments in {results_path}')
+    for file in os.listdir(results_path):
+        print(f'Processing file {file}')
+        structured_result = process_results_file_keren(f'{results_path}{file}')
+        results.append(structured_result)
+    return results
+
 def generate_structured_results(results_path):
     results = []
     id = 0
@@ -140,37 +178,41 @@ def generate_search_history_plot(df):
         task = f'{row["Domain"]} {row["Problem"]} {row["Metric"]}'
         initial_metric = row['Initial Metric']
         solution_history = row['Solutions History']
-        solutions_list = [(0, initial_metric,0)]
-        this_metric = None
-        this_changes = None
-        for sol in solution_history:
-            this_metric = sol['Metric']
-            this_time = sol['Time']
-            this_changes = sol['g of Solutions']
-            solutions_list.append((this_time, this_metric, this_changes))
-        last_time = row['Total Execution Time']
-        if len(solutions_list) > 2:
-            if this_metric is not None: # if is an interesting problem with different solutions
-                solutions_list.append((last_time, this_metric, this_changes))
-                times = [x[0] for x in solutions_list]
-                metrics = [x[1] for x in solutions_list]
-                changes = [x[2] for x in solutions_list]
-                fig, ax = plt.subplots()
-                plt.xlabel('Time (s)', fontsize=14)
-                plt.ylabel(row['Metric'], fontsize=14)
-                """plt.legend((lo, ll, l, a, h, hh, ho),
-                           ('Low Outlier', 'LoLo', 'Lo', 'Average', 'Hi', 'HiHi', 'High Outlier'),
-                           scatterpoints=1,
-                           loc='lower left',
-                           ncol=3,
-                           fontsize=8)"""
-                aux = plt.scatter(times, metrics, c=changes, s=70, cmap='tab10')
-                plt.plot(times, metrics, color='grey')
-                plt.legend(*aux.legend_elements())
-                #ax.legend((aux), ('a'), scatterpoints=1)
-                ax.grid(True)
-                plt.show()
-                break
+        if solution_history is not None:
+            solutions_list = [(0, initial_metric,0)]
+            this_metric = None
+            this_changes = None
+            for sol in solution_history:
+                this_metric = sol['Metric']
+                this_time = sol['Time']
+                this_changes = sol['g of Solutions']
+                solutions_list.append((this_time, this_metric, this_changes))
+            last_time = row['Total Execution Time']
+            different_metrics = set([x[1] for x in solutions_list])
+            different_g = set([x[2] for x in solutions_list])
+            if len(solutions_list) > 10 and len(different_metrics) > 5 and len(different_g) > 3:
+                if this_metric is not None: # if is an interesting problem with different solutions
+                    solutions_list.append((last_time, this_metric, this_changes))
+                    times = [x[0] for x in solutions_list]
+                    metrics = [x[1] for x in solutions_list]
+                    changes = [x[2] for x in solutions_list]
+                    fig, ax = plt.subplots()
+                    plt.xlabel('Time (s)', fontsize=14)
+                    plt.ylabel('maxAvgD', fontsize=14)
+                    """plt.legend((lo, ll, l, a, h, hh, ho),
+                               ('Low Outlier', 'LoLo', 'Lo', 'Average', 'Hi', 'HiHi', 'High Outlier'),
+                               scatterpoints=1,
+                               loc='lower left',
+                               ncol=3,
+                               fontsize=8)"""
+                    aux = plt.scatter(times, metrics, c=changes, s=70, cmap='tab10')
+                    plt.plot(times, metrics, color='grey')
+                    plt.legend(*aux.legend_elements())
+                    #ax.legend((aux), ('a'), scatterpoints=1)
+                    ax.grid(True)
+                    plt.show()
+                    print(len(solutions_list))
+                    break
 
     print()
 
@@ -186,7 +228,7 @@ def get_first_best_sol(solution_history):
     return best_metric, best_time, best_expanded
 
 
-def generate_big_table(df):
+def generate_big_table(df, keren_df):
     domains = ['blocks-words', 'depots', 'grid-navigation', 'ipc-grid', 'logistics']
     metrics_order = ['goal_transparency', 'plan_transparency', 'goal_privacy', 'plan_privacy',
                      'min_avg_distance_goal_compliance', 'max_avg_distance_goal_compliance',
@@ -203,22 +245,72 @@ def generate_big_table(df):
             times = []
             improvements = []
             initial_metrics = []
+
+            keren_expanded_nodes = []
+            keren_times = []
+            keren_initial_metrics = []
+            keren_improvements = []
+
             total_problems = 0
             improved_problems = 0
+            problems_with_unreachable_goals = 0
             for index, row in this_results.iterrows():
                 total_problems += 1
                 metric = row['Metric']
                 initial_metric = row['Initial Metric']
                 solution_history = row['Solutions History']
+                if solution_history is None:
+                    problems_with_unreachable_goals += 1
+                    continue
                 best_metric, best_time, best_expanded = get_first_best_sol(solution_history)
                 if best_metric != None: # i.e., we are only reporting problems for which we find improvements
-                    improved_problems += 1
-                    improvement = best_metric
-                    expanded_nodes.append(best_expanded)
-                    times.append(best_time)
-                    improvements.append(improvement)
-                    initial_metrics.append(initial_metric)
+                    if metric == 'goal_transparency':
+                        for keren_index, keren_row in keren_df.iterrows():
+                            if keren_row['Domain'] == row['Domain'] and \
+                                keren_row['Problem'] == row['Problem'] and \
+                                    keren_row['Sol Metric'] is not None: # keren also finds and improvement for this problem
+                                improved_problems += 1
+                                # Our data
+                                improvement = best_metric
+                                expanded_nodes.append(best_expanded)
+                                times.append(best_time)
+                                improvements.append(improvement)
+                                initial_metrics.append(initial_metric)
+                                # kerens data
+                                keren_expanded_nodes.append(keren_row['Expanded Nodes'])
+                                keren_times.append(keren_row['Sol Time'])
+                                keren_improvements.append(keren_row['Sol Metric'])
+                                keren_initial_metrics.append(keren_row['Initial Metric'])
+
+                    else:
+                        improved_problems += 1
+                        improvement = best_metric
+                        expanded_nodes.append(best_expanded)
+                        times.append(best_time)
+                        improvements.append(improvement)
+                        initial_metrics.append(initial_metric)
             if len(times) > 0:
+                # reporting keren
+                avg_time = round(statistics.mean(keren_times), 1)
+                std_time = 0.0
+                if len(keren_times) > 1:
+                    std_time = round(statistics.stdev(keren_times), 1)
+                avg_expanded = round(statistics.mean(keren_expanded_nodes), 1)
+                std_expanded = 0.0
+                if len(keren_expanded_nodes) > 1:
+                    std_expanded = round(statistics.stdev(keren_expanded_nodes), 1)
+                avg_improvement = round(statistics.mean(keren_improvements), 1)
+                std_improvement = 0.0
+                if len(keren_improvements) > 1:
+                    std_improvement = round(statistics.stdev(keren_improvements), 1)
+                avg_initial_metric = round(statistics.mean(keren_initial_metrics), 1)
+                std_initial_metric = 0.0
+                if len(keren_initial_metrics) > 1:
+                    std_initial_metric = round(statistics.stdev(keren_initial_metrics), 1)
+                print('KEREN')
+                print(
+                    f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&')
+                # reporting ours
                 avg_time = round(statistics.mean(times),1)
                 std_time = 0.0
                 if len(times) > 1:
@@ -236,10 +328,12 @@ def generate_big_table(df):
                 if len(initial_metrics) > 1:
                     std_initial_metric = round(statistics.stdev(initial_metrics),1)
                 #print(f'{avg_time}\pm{std_time} & {avg_expanded}\pm{std_expanded} & {avg_improvement}\pm{std_improvement} & {improved_problems}/{total_problems}\\\\')
-                print(f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&',end='')
+                print(f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&')
+                print(f'In {m}, {improved_problems} out of {total_problems}. Unreachable={problems_with_unreachable_goals}')
             else:
                 print(f'- & - & - &',end='')
         print('\\\\')
+
 
 def generate_reduction_per_g_violinplot(df):
     print()
@@ -253,11 +347,15 @@ if __name__ == '__main__':
     structured_results_df = pd.DataFrame(all_structured_results)
     structured_results_df.to_json('structured_results.json')
     exit()"""
+    keren_results = generate_structured_results_keren('keren_results/')
+    keren_results_df = pd.DataFrame(keren_results)
+    print()
     extra_results = generate_structured_results('results_0')
     extra_results_df = pd.DataFrame(extra_results)
     structured_results_df = pd.read_json('structured_results.json')
     final_df = pd.concat([extra_results_df, structured_results_df])
-    generate_big_table(final_df)
-    generate_search_history_plot(structured_results_df)
+    aux = final_df[(final_df['Domain'] == 'blocks-words') & (final_df['Metric'] == 'goal_transparency')]
+    generate_big_table(final_df, keren_results_df)
+    #generate_search_history_plot(final_df)
     generate_reduction_per_g_violinplot(structured_results_df)
     print()
