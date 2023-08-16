@@ -128,10 +128,10 @@ def process_results_file_keren(results_file):
     results = {}
     results['Domain'] = domain
     results['Problem'] = problem.replace('.log','')
-    best_sol = None
-    best_time = None
-    best_expanded = None
-    best_generated = None
+    best_sol = 'None'
+    best_time = 'None'
+    best_expanded = 'None'
+    best_generated = 'None'
     for line in infile:
         if 'init wcd: ' in line:
             initial_metric = float(line.split(' ')[2])
@@ -175,57 +175,66 @@ def generate_structured_results(results_path):
 
 def generate_search_history_plot(df):
     for index, row in df.iterrows():
-        task = f'{row["Domain"]} {row["Problem"]} {row["Metric"]}'
-        initial_metric = row['Initial Metric']
-        solution_history = row['Solutions History']
-        if solution_history is not None:
-            solutions_list = [(0, initial_metric,0)]
-            this_metric = None
-            this_changes = None
-            for sol in solution_history:
-                this_metric = sol['Metric']
-                this_time = sol['Time']
-                this_changes = sol['g of Solutions']
-                solutions_list.append((this_time, this_metric, this_changes))
-            last_time = row['Total Execution Time']
-            different_metrics = set([x[1] for x in solutions_list])
-            different_g = set([x[2] for x in solutions_list])
-            if len(solutions_list) > 10 and len(different_metrics) > 5 and len(different_g) > 3:
-                if this_metric is not None: # if is an interesting problem with different solutions
-                    solutions_list.append((last_time, this_metric, this_changes))
-                    times = [x[0] for x in solutions_list]
-                    metrics = [x[1] for x in solutions_list]
-                    changes = [x[2] for x in solutions_list]
-                    fig, ax = plt.subplots()
-                    plt.xlabel('Time (s)', fontsize=14)
-                    plt.ylabel('maxAvgD', fontsize=14)
-                    """plt.legend((lo, ll, l, a, h, hh, ho),
-                               ('Low Outlier', 'LoLo', 'Lo', 'Average', 'Hi', 'HiHi', 'High Outlier'),
-                               scatterpoints=1,
-                               loc='lower left',
-                               ncol=3,
-                               fontsize=8)"""
-                    aux = plt.scatter(times, metrics, c=changes, s=70, cmap='tab10')
-                    plt.plot(times, metrics, color='grey')
-                    plt.legend(*aux.legend_elements())
-                    #ax.legend((aux), ('a'), scatterpoints=1)
-                    ax.grid(True)
-                    plt.show()
-                    print(len(solutions_list))
-                    break
+        if row['Domain'] == 'depots':
+            task = f'{row["Domain"]} {row["Problem"]} {row["Metric"]}'
+            initial_metric = row['Initial Metric']
+            solution_history = row['Solutions History']
+            if solution_history is not None:
+                solutions_list = [(0, initial_metric,0)]
+                this_metric = None
+                this_changes = None
+                for sol in solution_history:
+                    this_metric = sol['Metric']
+                    this_time = sol['Time']
+                    this_changes = sol['g of Solutions']
+                    solutions_list.append((this_time, this_metric, this_changes))
+                last_time = row['Total Execution Time']
+                different_metrics = set([x[1] for x in solutions_list])
+                different_g = set([x[2] for x in solutions_list])
+                if len(solutions_list) > 10 and len(different_metrics) > 5 and len(different_g) > 3:
+                    if this_metric is not None: # if is an interesting problem with different solutions
+                        solutions_list.append((last_time, this_metric, this_changes))
+                        times = [x[0] for x in solutions_list]
+                        metrics = [x[1] for x in solutions_list]
+                        changes = [x[2] for x in solutions_list]
+                        plt.rcParams['figure.figsize'] = [20, 8]
+                        fig, ax = plt.subplots()
+                        plt.xlabel('Time (s)', fontsize=31)
+                        plt.ylabel('maxAvgD', fontsize=31)
+                        """plt.legend((lo, ll, l, a, h, hh, ho),
+                                   ('Low Outlier', 'LoLo', 'Lo', 'Average', 'Hi', 'HiHi', 'High Outlier'),
+                                   scatterpoints=1,
+                                   loc='lower left',
+                                   ncol=3,
+                                   fontsize=8)"""
+                        aux = plt.scatter(times, metrics, c=changes, s=180, cmap='tab10')
 
-    print()
+                        plt.legend(*aux.legend_elements(),prop={'size': 25},markerscale=2,loc='lower right')
+
+                        plt.plot(times, metrics, color='grey')
+                        #ax.legend((aux), ('a'), scatterpoints=1)
+                        ax.grid(True)
+                        ax.tick_params(axis='both', which='major', labelsize=28)
+                        plt.show()
+                        print(len(solutions_list))
+                        break
+
+        print()
 
 def get_first_best_sol(solution_history):
     best_metric = None
     best_time = None
     best_expanded = None
+    num_sols = None
     for sol in solution_history:
         if sol['Number of Solutions'] == 1:
             best_metric = sol['Metric']
             best_time = sol['Time']
             best_expanded = sol['Expanded']
-    return best_metric, best_time, best_expanded
+    if len(solution_history) > 0:
+        last_sol = solution_history[-1]
+        num_sols = last_sol['Number of Solutions']
+    return best_metric, best_time, best_expanded, num_sols
 
 
 def generate_big_table(df, keren_df):
@@ -235,7 +244,9 @@ def generate_big_table(df, keren_df):
                      'min_max_distance_goal_compliance', 'max_min_distance_goal_compliance']
     lower_better = ['goal_transparency', 'plan_transparency', 'min_avg_distance_goal_compliance',
                     'min_max_distance_goal_compliance']
+    total_num_sols = []
     for domain in domains:
+        print(domain)
         for m in metrics_order:
             this_results = df[(df['Domain'] == domain) & (df['Metric'] == m)]
             if len(this_results) != 60:
@@ -245,6 +256,7 @@ def generate_big_table(df, keren_df):
             times = []
             improvements = []
             initial_metrics = []
+            top_quality_times = []
 
             keren_expanded_nodes = []
             keren_times = []
@@ -254,28 +266,41 @@ def generate_big_table(df, keren_df):
             total_problems = 0
             improved_problems = 0
             problems_with_unreachable_goals = 0
+            problems_where_we_do_not_compute_all_plans = 0
             for index, row in this_results.iterrows():
                 total_problems += 1
                 metric = row['Metric']
                 initial_metric = row['Initial Metric']
+                top_quality_time = row['Top Quality Time']
                 solution_history = row['Solutions History']
-                if solution_history is None:
+                if not isinstance(solution_history, list):
+                    #This can happen when some goals are unreachable, or when we spent all the time limit computing the plan library
                     problems_with_unreachable_goals += 1
                     continue
-                best_metric, best_time, best_expanded = get_first_best_sol(solution_history)
+                plans_per_goal = row['Number of Plans per Goal']
+                if 1000 in plans_per_goal:
+                    # This means we hitted the plan limit and we should not be reporting, as there could be other plans we are not accounting for
+                    # We needed to limit the number of optimal plans computed, otherwise we were running out of disk
+                    problems_where_we_do_not_compute_all_plans += 1
+                    continue
+                best_metric, best_time, best_expanded, num_sols = get_first_best_sol(solution_history)
                 if best_metric != None: # i.e., we are only reporting problems for which we find improvements
+                    total_num_sols.append(num_sols)
                     if metric == 'goal_transparency':
                         for keren_index, keren_row in keren_df.iterrows():
                             if keren_row['Domain'] == row['Domain'] and \
                                 keren_row['Problem'] == row['Problem'] and \
-                                    keren_row['Sol Metric'] is not None: # keren also finds and improvement for this problem
+                                    keren_row['Sol Metric'] != 'None' and \
+                                    keren_row['Initial Metric'] == initial_metric: # keren also finds and improvement for this problem
                                 improved_problems += 1
                                 # Our data
                                 improvement = best_metric
                                 expanded_nodes.append(best_expanded)
-                                times.append(best_time)
+                                actual_time = best_time + top_quality_time
+                                times.append(actual_time)
                                 improvements.append(improvement)
                                 initial_metrics.append(initial_metric)
+                                top_quality_times.append(top_quality_time)
                                 # kerens data
                                 keren_expanded_nodes.append(keren_row['Expanded Nodes'])
                                 keren_times.append(keren_row['Sol Time'])
@@ -286,30 +311,34 @@ def generate_big_table(df, keren_df):
                         improved_problems += 1
                         improvement = best_metric
                         expanded_nodes.append(best_expanded)
-                        times.append(best_time)
+                        actual_time = best_time + top_quality_time
+                        times.append(actual_time)
                         improvements.append(improvement)
                         initial_metrics.append(initial_metric)
             if len(times) > 0:
                 # reporting keren
-                avg_time = round(statistics.mean(keren_times), 1)
-                std_time = 0.0
-                if len(keren_times) > 1:
-                    std_time = round(statistics.stdev(keren_times), 1)
-                avg_expanded = round(statistics.mean(keren_expanded_nodes), 1)
-                std_expanded = 0.0
-                if len(keren_expanded_nodes) > 1:
-                    std_expanded = round(statistics.stdev(keren_expanded_nodes), 1)
-                avg_improvement = round(statistics.mean(keren_improvements), 1)
-                std_improvement = 0.0
-                if len(keren_improvements) > 1:
-                    std_improvement = round(statistics.stdev(keren_improvements), 1)
-                avg_initial_metric = round(statistics.mean(keren_initial_metrics), 1)
-                std_initial_metric = 0.0
-                if len(keren_initial_metrics) > 1:
-                    std_initial_metric = round(statistics.stdev(keren_initial_metrics), 1)
-                print('KEREN')
-                print(
-                    f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&')
+                #avg_top_quality = statistics.mean(top_quality_times)
+                if m == 'goal_transparency':
+                    avg_time = round(statistics.mean(keren_times), 1)
+                    std_time = 0.0
+                    if len(keren_times) > 1:
+                        std_time = round(statistics.stdev(keren_times), 1)
+                    avg_expanded = round(statistics.mean(keren_expanded_nodes), 1)
+                    std_expanded = 0.0
+                    if len(keren_expanded_nodes) > 1:
+                        std_expanded = round(statistics.stdev(keren_expanded_nodes), 1)
+                    avg_improvement = round(statistics.mean(keren_improvements), 1)
+                    std_improvement = 0.0
+                    if len(keren_improvements) > 1:
+                        std_improvement = round(statistics.stdev(keren_improvements), 1)
+                    avg_initial_metric = round(statistics.mean(keren_initial_metrics), 1)
+                    std_initial_metric = 0.0
+                    if len(keren_initial_metrics) > 1:
+                        std_initial_metric = round(statistics.stdev(keren_initial_metrics), 1)
+                    print('KEREN')
+                    print(f'Improved problems {improved_problems}')
+                    print(
+                        f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&')
                 # reporting ours
                 avg_time = round(statistics.mean(times),1)
                 std_time = 0.0
@@ -328,11 +357,15 @@ def generate_big_table(df, keren_df):
                 if len(initial_metrics) > 1:
                     std_initial_metric = round(statistics.stdev(initial_metrics),1)
                 #print(f'{avg_time}\pm{std_time} & {avg_expanded}\pm{std_expanded} & {avg_improvement}\pm{std_improvement} & {improved_problems}/{total_problems}\\\\')
-                print(f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&')
-                print(f'In {m}, {improved_problems} out of {total_problems}. Unreachable={problems_with_unreachable_goals}')
+                print(f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&',end='')
+                #print(f'In {m}, {improved_problems} out of {total_problems}. Unreachable={problems_with_unreachable_goals}')
             else:
                 print(f'- & - & - &',end='')
         print('\\\\')
+
+    avg_sols = statistics.mean(total_num_sols)
+    max_sols = max(total_num_sols)
+    print()
 
 
 def generate_reduction_per_g_violinplot(df):
