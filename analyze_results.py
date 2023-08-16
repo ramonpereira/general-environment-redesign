@@ -372,23 +372,8 @@ def generate_reduction_per_g_violinplot(df):
     print()
 
 if __name__ == '__main__':
-    """all_structured_results = []
-    for file in os.listdir():
-        if file.startswith('results_') and not file.endswith('.zip'):
-            structured_results = generate_structured_results(file)
-            all_structured_results += structured_results
-    structured_results_df = pd.DataFrame(all_structured_results)
-    structured_results_df.to_json('structured_results.json')
-    exit()"""
-    keren_results = generate_structured_results_keren('keren_results/')
-    keren_results_df = pd.DataFrame(keren_results)
-    print()
-    extra_results = generate_structured_results('results_0')
-    extra_results_df = pd.DataFrame(extra_results)
-    structured_results_df = pd.read_json('structured_results.json')
-    final_df = pd.concat([extra_results_df, structured_results_df])
-    aux = final_df[(final_df['Domain'] == 'blocks-words') & (final_df['Metric'] == 'goal_transparency')]
-    generate_big_table(final_df, keren_results_df)
-    #generate_search_history_plot(final_df)
-    generate_reduction_per_g_violinplot(structured_results_df)
+    ger_results_df = pd.read_json('ger_results.json')
+    keren_results_df = pd.read_json('grd_results.json')
+    generate_big_table(ger_results_df, keren_results_df)
+    generate_search_history_plot(ger_results_df)
     print()
