@@ -1,13 +1,10 @@
-import re
-
-import pandas as pd
-import os
 import ast
-import json
-
-import numpy as np
-import matplotlib.pyplot as plt
+import os
+import re
 import statistics
+
+import matplotlib.pyplot as plt
+import pandas as pd
 
 def process_search(results, search):
     solutions = []
@@ -239,14 +236,22 @@ def get_first_best_sol(solution_history):
 
 def generate_big_table(df, keren_df):
     domains = ['blocks-words', 'depots', 'grid-navigation', 'ipc-grid', 'logistics']
-    metrics_order = ['goal_transparency', 'plan_transparency', 'goal_privacy', 'plan_privacy',
-                     'min_avg_distance_goal_compliance', 'max_avg_distance_goal_compliance',
-                     'min_max_distance_goal_compliance', 'max_min_distance_goal_compliance']
+    metrics_order = [
+                    'goal_transparency', 
+                     'plan_transparency', 
+                     'goal_privacy', 
+                     'plan_privacy',
+                     'min_avg_distance_goal_compliance', 
+                     'max_avg_distance_goal_compliance',
+                     'min_max_distance_goal_compliance', 
+                     'max_min_distance_goal_compliance'
+                     ]
     lower_better = ['goal_transparency', 'plan_transparency', 'min_avg_distance_goal_compliance',
                     'min_max_distance_goal_compliance']
     total_num_sols = []
     for domain in domains:
         print(domain)
+        total_num_sols_per_domain = []
         for m in metrics_order:
             this_results = df[(df['Domain'] == domain) & (df['Metric'] == m)]
             if len(this_results) != 60:
@@ -257,6 +262,8 @@ def generate_big_table(df, keren_df):
             improvements = []
             initial_metrics = []
             top_quality_times = []
+
+            abs_improvements = []
 
             keren_expanded_nodes = []
             keren_times = []
@@ -286,6 +293,7 @@ def generate_big_table(df, keren_df):
                 best_metric, best_time, best_expanded, num_sols = get_first_best_sol(solution_history)
                 if best_metric != None: # i.e., we are only reporting problems for which we find improvements
                     total_num_sols.append(num_sols)
+                    total_num_sols_per_domain.append(num_sols)
                     if metric == 'goal_transparency':
                         for keren_index, keren_row in keren_df.iterrows():
                             if keren_row['Domain'] == row['Domain'] and \
@@ -301,6 +309,7 @@ def generate_big_table(df, keren_df):
                                 improvements.append(improvement)
                                 initial_metrics.append(initial_metric)
                                 top_quality_times.append(top_quality_time)
+                                abs_improvements.append(abs(initial_metric - improvement))
                                 # kerens data
                                 keren_expanded_nodes.append(keren_row['Expanded Nodes'])
                                 keren_times.append(keren_row['Sol Time'])
@@ -315,6 +324,7 @@ def generate_big_table(df, keren_df):
                         times.append(actual_time)
                         improvements.append(improvement)
                         initial_metrics.append(initial_metric)
+                        abs_improvements.append(abs(initial_metric - improvement))
             if len(times) > 0:
                 # reporting keren
                 #avg_top_quality = statistics.mean(top_quality_times)
@@ -336,9 +346,9 @@ def generate_big_table(df, keren_df):
                     if len(keren_initial_metrics) > 1:
                         std_initial_metric = round(statistics.stdev(keren_initial_metrics), 1)
                     print('KEREN')
-                    print(f'Improved problems {improved_problems}')
-                    print(
-                        f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&')
+                    # print(f'Improved problems {improved_problems}')
+                    # print(f'{avg_time}\pm{std_time} & {avg_expanded}\pm{std_expanded} & {avg_improvement}\pm{std_improvement} & {improved_problems}/{total_problems}&')
+                    # print(f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&')
                 # reporting ours
                 avg_time = round(statistics.mean(times),1)
                 std_time = 0.0
@@ -356,15 +366,23 @@ def generate_big_table(df, keren_df):
                 std_initial_metric = 0.0
                 if len(initial_metrics) > 1:
                     std_initial_metric = round(statistics.stdev(initial_metrics),1)
-                #print(f'{avg_time}\pm{std_time} & {avg_expanded}\pm{std_expanded} & {avg_improvement}\pm{std_improvement} & {improved_problems}/{total_problems}\\\\')
-                print(f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&',end='')
-                #print(f'In {m}, {improved_problems} out of {total_problems}. Unreachable={problems_with_unreachable_goals}')
+                # print(f'{avg_time}\pm{std_time} & {avg_expanded}\pm{std_expanded} & {avg_improvement}\pm{std_improvement} & {improved_problems}/{total_problems}\\\\')
+                # print(f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&',end='')
+                # print(f'In {m}, {improved_problems} out of {total_problems}. Unreachable={problems_with_unreachable_goals}')
+
+                avg_sols_per_domain = statistics.mean(total_num_sols_per_domain)
+                print(avg_sols_per_domain)
+
+                # print(abs_improvements)
             else:
-                print(f'- & - & - &',end='')
+                print()
+                # print(f'- & - & - &',end='')
         print('\\\\')
 
     avg_sols = statistics.mean(total_num_sols)
+    # print(avg_sols)
     max_sols = max(total_num_sols)
+    # print(max_sols)
     print()
 
 
@@ -373,7 +391,9 @@ def generate_reduction_per_g_violinplot(df):
 
 if __name__ == '__main__':
     ger_results_df = pd.read_json('ger_results.json')
+    # ger_results_df.to_csv('ger_results.csv', sep=',')
     keren_results_df = pd.read_json('grd_results.json')
     generate_big_table(ger_results_df, keren_results_df)
-    generate_search_history_plot(ger_results_df)
+    # generate_search_history_plot(ger_results_df)
+
     print()
