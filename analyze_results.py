@@ -241,21 +241,21 @@ def generate_big_table(df, keren_df):
     domains = ['blocks-words', 'depots', 'grid-navigation', 'ipc-grid', 'logistics']
     metrics_order = [
                      'goal_transparency', 
-                    #  'plan_transparency', 
-                    #  'goal_privacy', 
-                    #  'plan_privacy',
-                    #  'min_avg_distance_goal_compliance', 
-                    #  'max_avg_distance_goal_compliance',
-                    #  'min_max_distance_goal_compliance', 
-                    #  'max_min_distance_goal_compliance'
+                     'plan_transparency', 
+                     'goal_privacy', 
+                     'plan_privacy',
+                     'min_avg_distance_goal_compliance', 
+                     'max_avg_distance_goal_compliance',
+                     'min_max_distance_goal_compliance', 
+                     'max_min_distance_goal_compliance'
                      ]
     lower_better = ['goal_transparency', 'plan_transparency', 'min_avg_distance_goal_compliance' 'min_max_distance_goal_compliance']
     total_num_sols = []
     for domain in domains:
-        print(domain)
+        print('\n#> ' + domain + '\n')
         total_num_sols_per_domain = []
         for m in metrics_order:
-            print(m)
+            print('\n# ' + m)
             this_results = df[(df['Domain'] == domain) & (df['Metric'] == m)]
             if len(this_results) != 60:
                 print(f'{domain} does not have the 60 problems for metric {m}, only {len(this_results)}, skipping')
@@ -349,9 +349,10 @@ def generate_big_table(df, keren_df):
                     if len(keren_initial_metrics) > 1:
                         std_initial_metric = round(statistics.stdev(keren_initial_metrics), 1)
                     # print('GRD-LS')
-                    print(f'Improved problems = {improved_problems}')
+                    # print(f'Improved problems = {improved_problems}')
+                    
                     # print(f'{avg_time}\pm{std_time} & {avg_expanded}\pm{std_expanded} & {avg_improvement}\pm{std_improvement} & {improved_problems}/{total_problems}&')
-                    # print(f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&')
+                    print(f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&')
                 # reporting ours
                 avg_time = round(statistics.mean(times),1)
                 std_time = 0.0
@@ -370,14 +371,14 @@ def generate_big_table(df, keren_df):
                 if len(initial_metrics) > 1:
                     std_initial_metric = round(statistics.stdev(initial_metrics),1)
                 # print(f'{avg_time}\pm{std_time} & {avg_expanded}\pm{std_expanded} & {avg_improvement}\pm{std_improvement} & {improved_problems}/{total_problems}\\\\')
-                # print(f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&',end='')
+                print(f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&',end='')
                 # print(f'In {m}, {improved_problems} out of {total_problems}. Unreachable={problems_with_unreachable_goals}')
 
-                avg_sols_per_domain = statistics.mean(total_num_sols_per_domain)
+                # avg_sols_per_domain = statistics.mean(total_num_sols_per_domain)
                 # print(avg_sols_per_domain)
 
                 # print('\n- Absolute values for Improvement')
-                print(abs_improvements)
+                # print(abs_improvements)
             else:
                 print()
                 # print(f'- & - & - &',end='')
