@@ -8,7 +8,7 @@ rc('text', usetex=True)
 
 # Goal Transparency
 years = (r"\textsc{blocks}", r"\textsc{depots}", r"\textsc{grid}", r"\textsc{ipc-grid}", r"\textsc{logistics}")
-improvements = (26, 1, 4, 8, 2)
+improvements = (26, 1, 4, 8, 0)
 
 # Plan Transparency
 # years = (r"\textsc{blocks}", r"\textsc{depots}", r"\textsc{grid}", r"\textsc{ipc-grid}", r"\textsc{logistics}")
@@ -79,7 +79,7 @@ ax.bar(x=np.arange(len(improvements)), # The x coordinates of the bars.
 
 ax.set_ylabel('Improvements', fontsize=65)
 
-ax.set_title(r"Total Improvements: 41 out of 300 (5 * 60)", fontsize=45)
+ax.set_title(r"Total Improvements: 39 out of 300 (5 * 60)", fontsize=45)
 
 # ax.set_title(r"Total Improvements: 68 out of 300 (5 * 60)", fontsize=45)
 

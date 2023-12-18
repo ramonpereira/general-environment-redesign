@@ -240,10 +240,10 @@ def get_first_best_sol(solution_history):
 def generate_big_table(df, keren_df):
     domains = ['blocks-words', 'depots', 'grid-navigation', 'ipc-grid', 'logistics']
     metrics_order = [
-                    #  'goal_transparency', 
+                     'goal_transparency', 
                     #  'plan_transparency', 
                     #  'goal_privacy', 
-                     'plan_privacy',
+                    #  'plan_privacy',
                     #  'min_avg_distance_goal_compliance', 
                     #  'max_avg_distance_goal_compliance',
                     #  'min_max_distance_goal_compliance', 
@@ -255,6 +255,7 @@ def generate_big_table(df, keren_df):
         print(domain)
         total_num_sols_per_domain = []
         for m in metrics_order:
+            print(m)
             this_results = df[(df['Domain'] == domain) & (df['Metric'] == m)]
             if len(this_results) != 60:
                 print(f'{domain} does not have the 60 problems for metric {m}, only {len(this_results)}, skipping')
@@ -347,8 +348,8 @@ def generate_big_table(df, keren_df):
                     std_initial_metric = 0.0
                     if len(keren_initial_metrics) > 1:
                         std_initial_metric = round(statistics.stdev(keren_initial_metrics), 1)
-                    print('KEREN')
-                    # print(f'Improved problems {improved_problems}')
+                    # print('GRD-LS')
+                    print(f'Improved problems = {improved_problems}')
                     # print(f'{avg_time}\pm{std_time} & {avg_expanded}\pm{std_expanded} & {avg_improvement}\pm{std_improvement} & {improved_problems}/{total_problems}&')
                     # print(f'& {avg_time}/{std_time} & {avg_initial_metric}/{std_initial_metric} & {avg_improvement}/{std_improvement}&')
                 # reporting ours
@@ -373,7 +374,7 @@ def generate_big_table(df, keren_df):
                 # print(f'In {m}, {improved_problems} out of {total_problems}. Unreachable={problems_with_unreachable_goals}')
 
                 avg_sols_per_domain = statistics.mean(total_num_sols_per_domain)
-                print(avg_sols_per_domain)
+                # print(avg_sols_per_domain)
 
                 # print('\n- Absolute values for Improvement')
                 print(abs_improvements)
@@ -397,6 +398,6 @@ if __name__ == '__main__':
     # ger_results_df.to_csv('ger_results.csv', sep=',')
     keren_results_df = pd.read_json('grd_results.json')
     generate_big_table(ger_results_df, keren_results_df)
-    generate_search_history_plot(ger_results_df)
+    # generate_search_history_plot(ger_results_df)
 
     print()
