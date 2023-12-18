@@ -5,6 +5,9 @@ import statistics
 
 import matplotlib.pyplot as plt
 import pandas as pd
+from matplotlib import rc
+
+rc('text', usetex=True)
 
 def process_search(results, search):
     solutions = []
@@ -196,8 +199,8 @@ def generate_search_history_plot(df):
                         changes = [x[2] for x in solutions_list]
                         plt.rcParams['figure.figsize'] = [20, 8]
                         fig, ax = plt.subplots()
-                        plt.xlabel('Time (s)', fontsize=31)
-                        plt.ylabel('maxAvgD', fontsize=31)
+                        plt.xlabel(r'Time (seconds)', fontsize=50)
+                        plt.ylabel(r'Max. Avg. Distance', fontsize=45)
                         """plt.legend((lo, ll, l, a, h, hh, ho),
                                    ('Low Outlier', 'LoLo', 'Lo', 'Average', 'Hi', 'HiHi', 'High Outlier'),
                                    scatterpoints=1,
@@ -206,7 +209,7 @@ def generate_search_history_plot(df):
                                    fontsize=8)"""
                         aux = plt.scatter(times, metrics, c=changes, s=180, cmap='tab10')
 
-                        plt.legend(*aux.legend_elements(),prop={'size': 25},markerscale=2,loc='lower right')
+                        plt.legend(*aux.legend_elements(),prop={'size': 30},markerscale=2,loc='lower right')
 
                         plt.plot(times, metrics, color='grey')
                         #ax.legend((aux), ('a'), scatterpoints=1)
@@ -237,17 +240,16 @@ def get_first_best_sol(solution_history):
 def generate_big_table(df, keren_df):
     domains = ['blocks-words', 'depots', 'grid-navigation', 'ipc-grid', 'logistics']
     metrics_order = [
-                    'goal_transparency', 
-                     'plan_transparency', 
-                     'goal_privacy', 
+                    #  'goal_transparency', 
+                    #  'plan_transparency', 
+                    #  'goal_privacy', 
                      'plan_privacy',
-                     'min_avg_distance_goal_compliance', 
-                     'max_avg_distance_goal_compliance',
-                     'min_max_distance_goal_compliance', 
-                     'max_min_distance_goal_compliance'
+                    #  'min_avg_distance_goal_compliance', 
+                    #  'max_avg_distance_goal_compliance',
+                    #  'min_max_distance_goal_compliance', 
+                    #  'max_min_distance_goal_compliance'
                      ]
-    lower_better = ['goal_transparency', 'plan_transparency', 'min_avg_distance_goal_compliance',
-                    'min_max_distance_goal_compliance']
+    lower_better = ['goal_transparency', 'plan_transparency', 'min_avg_distance_goal_compliance' 'min_max_distance_goal_compliance']
     total_num_sols = []
     for domain in domains:
         print(domain)
@@ -373,7 +375,8 @@ def generate_big_table(df, keren_df):
                 avg_sols_per_domain = statistics.mean(total_num_sols_per_domain)
                 print(avg_sols_per_domain)
 
-                # print(abs_improvements)
+                # print('\n- Absolute values for Improvement')
+                print(abs_improvements)
             else:
                 print()
                 # print(f'- & - & - &',end='')
@@ -394,6 +397,6 @@ if __name__ == '__main__':
     # ger_results_df.to_csv('ger_results.csv', sep=',')
     keren_results_df = pd.read_json('grd_results.json')
     generate_big_table(ger_results_df, keren_results_df)
-    # generate_search_history_plot(ger_results_df)
+    generate_search_history_plot(ger_results_df)
 
     print()
