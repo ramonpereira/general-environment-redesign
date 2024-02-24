@@ -1,4 +1,4 @@
-# General Environment Redesign
+# Generalising Environment Redesign
 
 In this project, we develop a general environment redesign approach that is metric-agnostic and leverages recent research on top-quality planning to efficiently redesign planning environments according to any interested party's objective and metric. 
 
